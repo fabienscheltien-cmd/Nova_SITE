@@ -20,6 +20,10 @@ RewriteRule ^(.*)$ https://www.nova-serenity.fr/$1 [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
 RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
 
+# Page d'accueil : une seule URL (/), l'ancien nom de fichier redirige
+RewriteCond %{THE_REQUEST} \s/+nova-serenity-with-intro-video1\.html[\s?] [NC]
+RewriteRule ^nova-serenity-with-intro-video1\.html$ / [R=301,L]
+
 # /blog -> /blog/
 RewriteRule ^blog$ /blog/ [R=301,L]
 </IfModule>
