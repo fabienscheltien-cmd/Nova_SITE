@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nos outils : Nova Store, accueil, salles, conciergerie | NOVA</title>
+
+<meta name="description" content="Registre des visiteurs, réservation des salles, conciergerie, gestion des temps et animations : les 5 outils web NOVA, sans installation.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Aurélie Godin, NOVA Serenity">
+<meta name="geo.region" content="FR-75"/>
+<meta name="geo.placename" content="Paris 8e, Île-de-France"/>
+<meta name="geo.position" content="48.8684;2.3040"/>
+<meta name="ICBM" content="48.8684, 2.3040"/>
+<link rel="canonical" href="https://www.nova-serenity.fr/nova-store.html">
+<link rel="alternate" hreflang="fr-FR" href="https://www.nova-serenity.fr/nova-store.html">
+
+<meta name="keywords" content="Nova Store, NOVA DESK, NOVA LIFE, NOVA SPACE, NOVA TEMPO, NOVA PASS, registre des visiteurs, accueil visiteurs QR code, plateforme web de conciergerie d&#x27;entreprise, réservation de salles de réunion, gestion des temps hôtes et hôtesses, retouche repassage cordonnerie en entreprise, animations en entreprise, hospitality corporate, services aux occupants, conciergerie phygitale, QVCT, logiciel accueil visiteurs, badge visiteur, flex office, workplace experience, animations QVT, Family Day, Octobre Rose, atelier bien-être en entreprise, hôtesse d&#x27;accueil en entreprise, hôtes et hôtesses d&#x27;accueil, hôtessariat, hôtessariat en entreprise, société d&#x27;accueil en entreprise"/>
+
+<meta property="og:site_name" content="NOVA Serenity">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nos outils : Nova Store, accueil, salles, conciergerie | NOVA">
+<meta property="og:description" content="Registre des visiteurs, réservation des salles, conciergerie, gestion des temps et animations : les 5 outils web NOVA, sans installation.">
+<meta property="og:url" content="https://www.nova-serenity.fr/nova-store.html">
+<meta property="og:image" content="https://www.nova-serenity.fr/images/og-nova-store.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nos outils : Nova Store, accueil, salles, conciergerie | NOVA">
+<meta name="twitter:description" content="Registre des visiteurs, réservation des salles, conciergerie, gestion des temps et animations : les 5 outils web NOVA, sans installation.">
+<meta name="twitter:image" content="https://www.nova-serenity.fr/images/og-nova-store.jpg">
+
+<link rel="icon" href="favicon.ico" sizes="48x48"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="manifest" href="site.webmanifest"/>
+<meta name="theme-color" content="#071424"/>
+<link rel="alternate" type="application/rss+xml" title="Blog NOVA Serenity" href="https://www.nova-serenity.fr/blog/feed.xml"/>
+
+<style>
+@charset "UTF-8";
+/* =========================================================================
+   NOVA SERENITY — Nova Store
+   Feuille de style unique et réorganisée.
+   Palette alignée sur les applications réelles Nova DESK et Nova Space.
+
+   SOMMAIRE
+   01. Jetons de design
+   02. Base et accessibilité
+   03. Logo et verrouillages de marque
+   04. Navigation
+   05. Fil d'Ariane
+   06. Hero
+   07. Structure des sections
+   08. Blocs plateformes
+   09. Aperçus interactifs
+   10. Parcours de mise en place
+   11. Atouts
+   12. FAQ
+   13. Appel à l'action
+   14. Pied de page
+   15. Apparition au défilement
+   16. Responsive
+   17. Préférences système et impression
+   ========================================================================= */
+
+/* =========================================================================
+   01. JETONS DE DESIGN
+   ========================================================================= */
+:root {
+    /* Fonds — repris pixel pour pixel des applications Nova DESK et Nova Space */
+    --fond: #071424;
+    --surface: #0e2036;
+    --surface-haute: #142b45;
+    --bordure: rgba(255, 255, 255, 0.09);
+    --bordure-forte: rgba(255, 255, 255, 0.16);
+
+    /* Bleus de marque, échantillonnés sur le logo et les boutons applicatifs */
+    --bleu-profond: #0a5c96;
+    --bleu: #2a6ead;
+    --bleu-vif: #4084c8;
+    --bleu-clair: #8fb6dc;
+
+    /* Accents pastel : un par plateforme */
+    --desk: #8fcfae;
+    --life: #efa8bd;
+    --space: #f6b183;
+    --tempo: #b3a5d9;
+    --pass: #7fb6d9;
+
+    /* Texte */
+    --texte: #e8eef5;
+    --texte-doux: #a8b8cb;
+    --texte-faible: #7186a0;
+
+    /* Mesures */
+    --nav-hauteur: 100px;
+    --rayon: 16px;
+    --rayon-petit: 10px;
+    --ombre: 0 18px 44px rgba(0, 0, 0, 0.42);
+    --transition: 0.25s ease;
+}
+
+/* =========================================================================
+   02. BASE ET ACCESSIBILITÉ
+   ========================================================================= */
+*,
+*::before,
+*::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-hauteur) + 16px);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    color: var(--texte);
+    background: var(--fond);
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+}
+
+img, svg { max-width: 100%; }
+img { height: auto; }
+
+a { color: var(--bleu-clair); }
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--bleu-vif);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+.lien-evitement {
+    position: absolute; left: -9999px; top: 0; z-index: 10000;
+    background: var(--bleu-vif); color: #fff;
+    padding: 1rem 1.5rem; font-weight: 600; text-decoration: none;
+}
+.lien-evitement:focus { left: 0; }
+
+/* Contenu réservé aux technologies d'assistance */
+.hors-ecran {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* =========================================================================
+   03. LOGO ET VERROUILLAGES DE MARQUE
+   ========================================================================= */
+.marque { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; text-decoration: none; }
+.marque .logo { display: block; height: 46px; width: auto; }
+
+
+/* Verrouillage utilisé pour chaque plateforme : le signe NOVA puis le nom dessous */
+.lockup { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; }
+.lockup .logo { display: block; height: 22px; width: auto; }
+.lockup .lockup-mot {
+    font-size: 0.95rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent, var(--bleu-clair)); line-height: 1;
+}
+
+/* =========================================================================
+   04. NAVIGATION
+   ========================================================================= */
+.nav-principale {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(7, 20, 36, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    padding: 0.9rem 0;
+    transition: background var(--transition), border-color var(--transition);
+}
+.nav-principale.defile {
+    background: rgba(7, 20, 36, 0.985);
+    border-bottom-color: var(--bordure);
+}
+
+.nav-conteneur {
+    max-width: 1320px; margin: 0 auto; padding: 0 1.75rem;
+    /* Trois colonnes : marque, nom de section, liens.
+       Le nom occupe sa propre colonne, il ne peut donc jamais recouvrir les liens. */
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center; gap: 1.5rem;
+}
+.nav-conteneur > .marque { justify-self: start; }
+.nav-conteneur > .nav-liens { justify-self: end; }
+
+
+
+.nav-liens { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-liens a {
+    color: var(--texte-doux); text-decoration: none; font-size: 0.88rem;
+    white-space: nowrap;
+    position: relative; padding: 0.3rem 0; transition: color var(--transition);
+}
+.nav-liens a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0;
+    width: 0; height: 2px; background: var(--bleu-vif); transition: width var(--transition);
+}
+.nav-liens a:hover { color: var(--texte); }
+.nav-liens a:hover::after,
+.nav-liens a[aria-current="page"]::after { width: 100%; }
+.nav-liens a[aria-current="page"] { color: var(--texte); }
+
+.nav-bascule {
+    display: none; background: transparent; color: var(--texte);
+    border: 1px solid var(--bordure-forte); border-radius: 9px;
+    padding: 0.45rem 0.7rem; font-size: 1.35rem; line-height: 1; cursor: pointer;
+}
+
+/* =========================================================================
+   05. FIL D'ARIANE
+   ========================================================================= */
+.fil-ariane { padding: calc(var(--nav-hauteur) + 1rem) 1.75rem 0; font-size: 0.85rem; }
+.fil-ariane ol {
+    max-width: 1320px; margin: 0 auto; list-style: none;
+    display: flex; flex-wrap: wrap; gap: 0.5rem; color: var(--texte-faible);
+}
+.fil-ariane a { color: var(--texte-doux); text-decoration: none; }
+.fil-ariane a:hover { color: var(--bleu-clair); }
+.fil-ariane li + li::before { content: '›'; margin-right: 0.5rem; color: var(--texte-faible); }
+
+/* =========================================================================
+   06. HERO
+   Même traitement que l'application Nova DESK : photo pleine largeur,
+   voile sombre uniforme, contenu aligné à gauche.
+   ========================================================================= */
+.hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    padding: 4rem 1.75rem;
+    background-color: var(--fond);
+}
+
+.hero::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('images/store/fond-hero-store.webp');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
+/* Voile sombre : léger à droite pour laisser vivre la photo,
+   dense à gauche pour garantir la lisibilité du texte. */
+.hero::after {
+    content: '';
+    position: absolute; inset: 0; z-index: 1;
+    background:
+        linear-gradient(90deg,
+            var(--fond) 0%,
+            rgba(7, 20, 36, 0.94) 26%,
+            rgba(7, 20, 36, 0.74) 52%,
+            rgba(7, 20, 36, 0.52) 100%),
+        linear-gradient(180deg, rgba(7, 20, 36, 0.45) 0%, transparent 30%, rgba(7, 20, 36, 0.5) 100%);
+}
+
+.hero-contenu {
+    position: relative; z-index: 2;
+    width: 100%; max-width: 1320px; margin: 0 auto;
+}
+
+.hero-texte { max-width: 40rem; }
+
+
+.hero-surtitre {
+    display: block; font-size: 0.76rem; letter-spacing: 0.26em;
+    text-transform: uppercase; color: var(--bleu-clair);
+    margin-bottom: 1.4rem; font-weight: 600;
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 5.4vw, 3.6rem); font-weight: 700;
+    line-height: 1.1; letter-spacing: -0.015em; color: #fff;
+    margin-bottom: 1.25rem;
+}
+.hero h1 .fin { font-weight: 300; color: var(--bleu-clair); display: block; font-size: 0.62em; margin-top: 0.5rem; letter-spacing: 0; }
+
+.hero-chapeau { font-size: 1.06rem; line-height: 1.75; color: var(--texte-doux); max-width: 34rem; }
+
+.hero-boutons { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.25rem; }
+
+/* =========================================================================
+   06 bis. BANDE DE PRÉSENTATION ET CARTES DES PLATEFORMES
+   ========================================================================= */
+.presentation { background: var(--fond); padding-top: 3.5rem; }
+.presentation .intro { max-width: 66ch; color: var(--texte-doux); font-size: 1.02rem; }
+.presentation .intro + .intro { margin-top: 1rem; }
+
+.hero-cartes {
+    list-style: none; display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem; margin: 2rem 0 0;
+    align-items: stretch;
+}
+.hero-cartes li { display: flex; }
+.hero-cartes a {
+    display: flex; flex-direction: column; align-items: flex-start;
+    width: 100%; text-decoration: none; color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--bordure);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--rayon); padding: 1.4rem 1.35rem 1.5rem;
+    transition: background var(--transition), transform var(--transition), border-color var(--transition);
+}
+.hero-cartes a:hover {
+    background: var(--surface-haute); transform: translateY(-4px);
+    border-color: var(--bordure-forte); border-top-color: var(--accent);
+}
+.hero-cartes .lockup { align-items: flex-start; margin-bottom: 0.9rem; }
+.hero-cartes .carte-role {
+    display: block; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.45rem;
+}
+.hero-cartes .carte-desc { font-size: 0.92rem; line-height: 1.6; color: var(--texte-doux); flex: 1; }
+
+.hero-relance {
+    max-width: 68ch; margin-top: 2.5rem; padding: 1.3rem 1.5rem;
+    background: rgba(64, 132, 200, 0.1);
+    border: 1px solid rgba(64, 132, 200, 0.28);
+    border-radius: var(--rayon); color: var(--texte); line-height: 1.75;
+}
+.hero-relance strong { color: var(--bleu-clair); }
+
+/* =========================================================================
+   07. STRUCTURE DES SECTIONS
+   ========================================================================= */
+section { padding: 4.5rem 1.75rem; }
+.conteneur { max-width: 1320px; margin: 0 auto; }
+
+.bande-claire { background: var(--surface); }
+
+.titre-section { text-align: center; margin-bottom: 3.25rem; }
+.titre-section h2 {
+    font-size: clamp(1.6rem, 3.3vw, 2.3rem); font-weight: 400;
+    position: relative; display: inline-block; color: #fff;
+}
+.titre-section h2::after {
+    content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+    width: 64px; height: 3px; background: var(--bleu-vif); border-radius: 2px;
+}
+.titre-section p {
+    color: var(--texte-doux); font-size: 1.02rem; margin-top: 1.75rem;
+    max-width: 66ch; margin-left: auto; margin-right: auto;
+}
+
+/* =========================================================================
+   08. BLOCS PLATEFORMES
+   ========================================================================= */
+.bloc-app {
+    display: grid; grid-template-columns: 1fr 1.05fr; gap: 2.75rem;
+    align-items: center;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.022);
+    border: 1px solid var(--bordure);
+    border-top: 3px solid var(--accent);
+    border-radius: 22px;
+}
+.bloc-app:last-of-type { margin-bottom: 0; }
+.bloc-app:nth-of-type(even) .bloc-visuel { order: -1; }
+
+.bloc-app.desk  { --accent: var(--desk); }
+.bloc-app.life  { --accent: var(--life); }
+.bloc-app.space { --accent: var(--space); }
+.bloc-app.tempo { --accent: var(--tempo); }
+.bloc-app.pass  { --accent: var(--pass); }
+
+.bloc-entete { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.35rem; }
+
+.pastille {
+    width: 54px; height: 54px; border-radius: 15px; flex-shrink: 0;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+}
+.pastille svg { width: 27px; height: 27px; }
+
+.etiquette {
+    display: inline-block; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.35rem;
+}
+
+.bloc-app h2 { font-size: clamp(1.5rem, 2.8vw, 1.95rem); color: #fff; line-height: 1.15; font-weight: 600; }
+
+/* Titre de plateforme composé avec le logo : le signe NOVA puis le nom en couleur */
+.titre-lockup { display: block; }
+.titre-lockup .titre-visuel {
+    display: inline-flex; align-items: center; gap: 0.42em;
+    line-height: 1;
+}
+.titre-lockup .logo,
+.titre-lockup img {
+    display: block; height: 0.82em; width: auto;
+}
+.titre-lockup .titre-mot {
+    font-weight: 800; font-size: 1em; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+}
+.bloc-texte p { color: var(--texte-doux); line-height: 1.85; margin-bottom: 1.05rem; }
+
+.liste-atouts { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.4rem; }
+.liste-atouts li {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    font-size: 0.96rem; line-height: 1.55; color: var(--texte);
+}
+.liste-atouts li::before {
+    content: ''; flex-shrink: 0; margin-top: 0.5rem;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+}
+
+.encart {
+    margin-top: 1.6rem; padding: 1rem 1.25rem;
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 var(--rayon-petit) var(--rayon-petit) 0;
+    font-size: 0.91rem; color: var(--texte-doux); line-height: 1.7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.demo-tuile {
+    border-radius: 12px; padding: 0.85rem 0.6rem; text-align: center;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--bordure);
+}
+.demo-tuile[hidden] { display: none; }
+.demo-tuile .tuile-marque {
+    width: 28px; height: 28px; border-radius: 8px; margin: 0 auto 0.5rem;
+    background: var(--accent); opacity: 0.55;
+}
+.demo-tuile .tuile-nom { font-size: 0.77rem; font-weight: 600; color: var(--texte); line-height: 1.35; }
+
+
+.demo-colonne { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.demo-barre {
+    width: 100%; border-radius: 7px 7px 0 0; background: var(--accent);
+    transition: height 0.55s cubic-bezier(0.25, 0.1, 0.25, 1); min-height: 4px;
+}
+
+
+
+
+
+
+/* -------------------------------------------------------------------------
+   Captures des applications réelles
+   Aucun filtre sombre ici : ce sont des interfaces, elles doivent rester
+   parfaitement lisibles. Seul un cadre discret les détache du fond.
+   ------------------------------------------------------------------------- */
+.bloc-capture {
+    margin-top: 1.1rem;
+    border-radius: var(--rayon);
+    overflow: hidden;
+    border: 1px solid var(--bordure-forte);
+    box-shadow: var(--ombre);
+    background: var(--fond);
+}
+.bloc-capture img {
+    display: block; width: 100%; height: auto;
+}
+.bloc-capture figcaption {
+    padding: 0.7rem 1rem 0.8rem;
+    font-size: 0.8rem; color: var(--texte-faible);
+    border-top: 1px solid var(--bordure);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* =========================================================================
+   10. PARCOURS DE MISE EN PLACE
+   ========================================================================= */
+.parcours { display: grid; grid-template-columns: repeat(auto-fit, minmax(238px, 1fr)); gap: 2rem; }
+.etape { text-align: center; }
+.etape-numero {
+    width: 58px; height: 58px; border-radius: 50%; margin: 0 auto 1.15rem;
+    background: rgba(64, 132, 200, 0.12); border: 2px solid var(--bleu-vif);
+    color: var(--bleu-clair);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; font-weight: 700;
+}
+.etape h3 { font-size: 1.1rem; color: #fff; margin-bottom: 0.55rem; }
+.etape p { color: var(--texte-doux); font-size: 0.94rem; line-height: 1.7; }
+
+/* =========================================================================
+   11. ATOUTS
+   ========================================================================= */
+.grille-atouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(252px, 1fr)); gap: 1.6rem; }
+.atout {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--bordure);
+    border-top: 3px solid var(--bleu-vif);
+    border-radius: var(--rayon); padding: 1.85rem;
+    transition: transform var(--transition), background var(--transition);
+}
+.atout:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.055); }
+.atout-icone {
+    width: 44px; height: 44px; border-radius: 12px; margin-bottom: 1rem;
+    background: rgba(64, 132, 200, 0.15); color: var(--bleu-clair);
+    display: flex; align-items: center; justify-content: center;
+}
+.atout-icone svg { width: 23px; height: 23px; }
+.atout h3 { color: #fff; font-size: 1.08rem; margin-bottom: 0.5rem; }
+.atout p { color: var(--texte-doux); font-size: 0.93rem; line-height: 1.7; }
+
+/* =========================================================================
+   12. FAQ
+   ========================================================================= */
+.grille-faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; align-items: start; }
+.faq-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--bordure);
+    border-radius: var(--rayon); padding: 1.4rem 1.65rem;
+}
+.faq-question {
+    background: transparent; border: none; width: 100%; text-align: left;
+    font-size: 1rem; font-weight: 600; font-family: inherit; color: var(--texte);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    cursor: pointer; padding: 0; line-height: 1.5;
+}
+.faq-icone {
+    flex-shrink: 0; width: 25px; height: 25px; border-radius: 50%;
+    background: var(--bleu-vif); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.05rem; line-height: 1; transition: transform var(--transition);
+}
+.faq-question[aria-expanded="true"] .faq-icone { transform: rotate(45deg); }
+.faq-reponse {
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease;
+    color: var(--texte-doux); font-size: 0.95rem;
+}
+.faq-reponse > div { overflow: hidden; }
+.faq-item.ouvert .faq-reponse { grid-template-rows: 1fr; }
+.faq-item.ouvert .faq-reponse > div { padding-top: 0.95rem; }
+
+/* =========================================================================
+   13. APPEL À L'ACTION
+   ========================================================================= */
+.bande-action { position: relative; overflow: hidden; text-align: center; }
+.bande-action::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background-image:
+        linear-gradient(180deg, rgba(7, 20, 36, 0.9) 0%, rgba(7, 20, 36, 0.96) 100%),
+        url('images/store/fond-hero-store.webp');
+    background-size: cover; background-position: center 30%;
+}
+.bande-action .conteneur { position: relative; z-index: 1; }
+.bande-action h2 { font-size: clamp(1.55rem, 3.3vw, 2.2rem); font-weight: 300; color: #fff; margin-bottom: 1rem; }
+.bande-action p { color: var(--texte-doux); max-width: 60ch; margin: 0 auto 2.1rem; }
+
+.bouton {
+    padding: 0.95rem 2.3rem; border: 1px solid transparent; border-radius: 50px;
+    font-size: 0.98rem; font-family: inherit; cursor: pointer; text-decoration: none;
+    display: inline-block; text-align: center;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.bouton-principal { background: var(--bleu-vif); color: #fff; font-weight: 600; }
+.bouton-principal:hover { background: #5798d8; transform: translateY(-2px); }
+.bouton-secondaire { background: transparent; color: var(--texte); border-color: var(--bordure-forte); }
+.bouton-secondaire:hover { background: rgba(255, 255, 255, 0.08); }
+.boutons { display: flex; gap: 1.1rem; justify-content: center; flex-wrap: wrap; }
+
+/* =========================================================================
+   14. PIED DE PAGE
+   ========================================================================= */
+footer {
+    background: #050e1a; padding: 2.75rem 1.75rem 1.4rem;
+    text-align: center; border-top: 1px solid var(--bordure);
+}
+.pied-contenu { max-width: 1320px; margin: 0 auto; }
+.pied-contenu .marque { align-items: center; margin-bottom: 1rem; }
+.pied-signature { font-size: 1.05rem; color: var(--bleu-clair); font-style: italic; margin-bottom: 0.4rem; }
+.pied-contenu > p { color: var(--texte-doux); font-size: 0.93rem; }
+.pied-liens { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4rem; margin: 1.9rem 0 0; }
+.pied-liens a { color: var(--texte-doux); text-decoration: none; font-size: 0.88rem; }
+.pied-liens a:hover { color: var(--bleu-clair); text-decoration: underline; }
+.pied-bas {
+    margin-top: 1.8rem; padding-top: 1.4rem; border-top: 1px solid var(--bordure);
+    font-size: 0.85rem; color: var(--texte-faible);
+}
+
+/* =========================================================================
+   15. APPARITION AU DÉFILEMENT
+   ========================================================================= */
+.apparition { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.apparition.visible { opacity: 1; transform: none; }
+
+/* =========================================================================
+   16. RESPONSIVE
+   ========================================================================= */
+@media (max-width: 1024px) {
+    .bloc-app { grid-template-columns: 1fr; gap: 2.25rem; padding: 2.75rem 0; }
+    .bloc-app:nth-of-type(even) .bloc-visuel { order: 0; }
+    .hero::before { background-position: 72% center; }
+}
+
+@media (max-width: 1280px) {
+    .hero-cartes { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1100px) {
+    .hero-cartes { grid-template-columns: repeat(2, 1fr); }
+    
+    .nav-liens { gap: 1.2rem; }
+    .nav-conteneur { gap: 1rem; }
+}
+
+@media (max-width: 900px) {
+    .grille-faq { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+    .nav-bascule { display: block; }
+    
+    .nav-conteneur { grid-template-columns: 1fr auto; gap: 0.85rem; }
+    .nav-conteneur > .nav-liens { grid-column: 1 / -1; justify-self: stretch; }
+    .nav-liens {
+        display: none; flex-direction: column; align-items: flex-start; width: 100%;
+        gap: 0.2rem; padding: 0.9rem 0 0.4rem;
+        border-top: 1px solid var(--bordure); margin-top: 0.4rem;
+    }
+    .nav-liens.ouvert { display: flex; }
+    .nav-liens a { display: block; width: 100%; padding: 0.65rem 0; font-size: 0.98rem; }
+    .nav-liens a::after { display: none; }
+}
+
+@media (max-width: 768px) {
+    .hero-cartes { grid-template-columns: 1fr; }
+    section { padding: 3.25rem 1.2rem; }
+    .hero { padding: 2.5rem 1.2rem 3.5rem; }
+    .hero::before { background-position: 65% center; }
+    .boutons { flex-direction: column; align-items: stretch; }
+}
+
+/* =========================================================================
+   17. PRÉFÉRENCES SYSTÈME ET IMPRESSION
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+    .apparition { opacity: 1; transform: none; }
+}
+
+@media (prefers-contrast: more) {
+    :root { --texte-doux: #d3dfec; --texte-faible: #b0c0d2; --bordure: rgba(255, 255, 255, 0.3); }
+}
+
+@media print {
+    .nav-principale, .demo, .bande-action::before, .fil-ariane { display: none !important; }
+    body { background: #fff; color: #000; }
+    .bloc-app { break-inside: avoid; }
+}
+
+.footer-nap{margin-top:1.8rem;font-size:.88rem;opacity:.75}.footer-nap a{color:inherit;text-decoration:none}
+
+
+.catalogue-life{grid-column:1/-1;margin-top:2.2rem;padding-top:2rem;border-top:1px solid var(--bordure)}
+.catalogue-titre{color:#fff;font-size:1.35rem;margin-bottom:.5rem}
+.catalogue-intro{color:var(--texte-doux);max-width:760px;margin-bottom:1.6rem}
+.catalogue-inter{display:grid;grid-template-columns:minmax(240px,300px) 1fr;gap:1.5rem;align-items:start}
+.themes-life{display:flex;flex-direction:column;gap:.6rem}
+.theme-life{display:flex;align-items:center;gap:.8rem;width:100%;text-align:left;padding:1rem 1.1rem;border-radius:14px;border:1px solid var(--bordure);background:var(--surface);color:var(--texte-doux);font:inherit;font-size:.98rem;cursor:pointer;transition:background .25s,border-color .25s,color .25s,transform .25s}
+.theme-life svg{width:22px;height:22px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.theme-nom{flex:1;font-weight:600}
+.theme-nb{font-size:.8rem;min-width:1.8rem;text-align:center;padding:.15rem .5rem;border-radius:50px;border:1px solid var(--bordure)}
+.theme-life:hover,.theme-life[aria-selected="true"]{color:#fff;border-color:var(--life);background:rgba(239,168,189,.08);transform:translateX(4px)}
+.theme-life[aria-selected="true"] svg{color:var(--life)}
+.theme-life[aria-selected="true"] .theme-nb{background:var(--life);border-color:var(--life);color:#0a1628;font-weight:700}
+.theme-life:focus-visible{outline:2px solid var(--life);outline-offset:3px}
+.panneau-life{background:var(--surface);border:1px solid var(--bordure);border-top:3px solid var(--life);border-radius:var(--rayon);padding:1.4rem 1.5rem;min-height:100%}
+.panneau-titre{color:var(--life);font-weight:700;font-size:1.05rem;margin-bottom:1rem}
+.activites{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.activite{padding:.95rem 1rem;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--bordure)}
+.activite strong{display:block;color:#fff;font-size:.95rem;margin-bottom:.25rem}
+.activite span{display:block;color:var(--texte-doux);font-size:.86rem;line-height:1.45}
+.activite.entre{animation:entreeLife .35s ease both}
+@keyframes entreeLife{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.activite.entre{animation:none}.theme-life{transition:none}}
+.marque .logo{height:40px!important}.marque .nl-word{display:block;height:calc(40px * 860 / 1482);width:auto;color:var(--bleu-clair)}
+footer .marque .logo{height:56px!important}footer .marque .nl-word{height:calc(56px * 860 / 1482)}
+@media (max-width:900px){.catalogue-inter{grid-template-columns:1fr}.themes-life{flex-direction:row;flex-wrap:wrap}.theme-life{width:auto;flex:1 1 45%}.theme-life:hover,.theme-life[aria-selected="true"]{transform:none}}
+@media (max-width:600px){.activites{grid-template-columns:1fr}}
+
+/* Les outils remontent au survol */
+.hero-cartes li > a{transition:translate .3s ease,box-shadow .3s ease,border-color .3s ease}
+.hero-cartes li > a:hover,.hero-cartes li > a:focus-visible{translate:0 -8px;box-shadow:0 18px 36px rgba(0,0,0,.4),0 0 0 1px var(--accent);border-color:var(--accent)}
+.bloc-app{transition:translate .35s ease,box-shadow .35s ease,opacity .6s ease,transform .6s ease}
+.bloc-app:hover{translate:0 -8px;box-shadow:0 24px 48px rgba(0,0,0,.45),0 0 0 1px var(--accent)}
+@media (prefers-reduced-motion:reduce){.hero-cartes li > a:hover,.bloc-app:hover{translate:none}}
+
+.fil-ariane{display:none!important}
+.hero{padding-top:calc(var(--nav-hauteur) + 2.5rem)!important}
+
+.nav-principale{background:rgba(10,22,40,.95)!important;padding:1rem 0!important;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.nav-conteneur{max-width:1400px!important;padding:0 2rem!important;display:grid!important;grid-template-columns:auto 1fr auto!important;align-items:center;column-gap:1.5rem;position:relative}
+.nav-conteneur>.marque{grid-column:1;grid-row:1;justify-self:start;margin:0!important;align-items:flex-start!important}
+.nav-conteneur>.store-centre{grid-column:2;grid-row:1;justify-self:center;display:block;line-height:0}
+.store-mot{display:block;height:46px;width:auto}
+.nav-conteneur>.nav-droite{grid-column:3;grid-row:1;justify-self:end;display:flex;align-items:center;gap:1.6rem}
+.nav-droite>.nav-liens{gap:1.1rem!important}
+.nav-liens a{color:#fff!important;font-size:.88rem!important}
+.nav-liens a::after{background:#c9a961!important;bottom:-5px!important}
+.nav-liens a:hover,.nav-liens a[aria-current="page"]{color:#c9a961!important}
+.nav-linkedin-store{display:inline-flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-size:.9rem;white-space:nowrap;transition:color .3s}
+.nav-linkedin-store:hover{color:#c9a961}
+@media (min-width:1400px){.nav-conteneur>.store-centre{grid-column:1/-1;position:absolute;left:0;right:0;margin:0 auto;width:max-content;top:50%;transform:translateY(-50%)}}
+@media (max-width:1100px){.nav-linkedin-store span{display:none}.nav-droite{gap:1rem}.nav-droite>.nav-liens{gap:.9rem!important}.store-mot{height:38px}}
+@media (max-width:860px){
+.nav-conteneur{grid-template-columns:auto 1fr auto auto!important;row-gap:.6rem}
+.nav-conteneur>.store-centre{justify-self:start}
+.store-mot{height:30px}
+.nav-conteneur>.nav-droite{display:contents}
+.nav-conteneur>.nav-droite>.nav-linkedin-store{grid-column:3;grid-row:1}
+.nav-conteneur>.nav-bascule{grid-column:4;grid-row:1}
+.nav-conteneur>.nav-droite>.nav-liens{grid-column:1/-1!important;grid-row:2;justify-self:stretch!important}
+.marque .logo{height:32px!important}.marque .nl-word{height:calc(32px * 860 / 1482)!important}
+}
+
+.bloc-app.pass{--cap:var(--pass)}.bloc-app.space{--cap:var(--space)}.bloc-app.desk{--cap:var(--desk)}.bloc-app.tempo{--cap:var(--tempo)}.bloc-app.life{--cap:var(--life)}
+.bloc-capture{margin-top:1.1rem!important;background:#0f213b!important;border:1px solid rgba(255,255,255,.08)!important;border-top:3px solid var(--cap,#8fb6dc)!important;border-radius:16px!important;padding:12px 12px 4px!important;box-shadow:0 18px 40px rgba(0,0,0,.35)!important;overflow:hidden}
+.bloc-capture img{display:block;width:100%!important;height:auto!important;aspect-ratio:16/9;object-fit:cover;object-position:top center;border-radius:10px;border:1px solid rgba(255,255,255,.06)}
+.bloc-capture figcaption{display:flex;align-items:center;gap:.55rem;border-top:0!important;background:none!important;padding:.75rem .35rem .6rem!important;font-size:.82rem!important;color:var(--texte-doux)!important}
+@media (min-width:1025px){.bloc-app:nth-of-type(even){grid-template-columns:1.05fr 1fr}}
+.bloc-capture figcaption::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--cap,#8fb6dc);flex-shrink:0}
+
+.fond-store{position:relative;overflow:hidden;background-color:#07111f;
+ background-image:
+  radial-gradient(55% 32% at 90% 4%,rgba(201,169,97,.16),transparent 70%),
+  radial-gradient(45% 30% at 6% 38%,rgba(64,132,200,.14),transparent 70%),
+  radial-gradient(55% 30% at 96% 72%,rgba(143,182,220,.09),transparent 70%),
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+ background-size:auto,auto,auto,72px 72px,72px 72px}
+.fond-store::before,.fond-store::after{content:'';position:absolute;pointer-events:none;border-radius:50%;z-index:0}
+.fond-store::before{width:1100px;height:1100px;right:-620px;top:-520px;border:1px solid transparent;border-left-color:rgba(201,169,97,.35);border-bottom-color:rgba(201,169,97,.18);transform:rotate(-12deg)}
+.fond-store::after{width:900px;height:900px;left:-560px;top:26%;border:1px solid transparent;border-right-color:rgba(143,182,220,.25);border-top-color:rgba(143,182,220,.12)}
+.fond-store>section{position:relative;z-index:1;background-color:transparent!important}
+.fond-store>section.bande-claire{background-color:rgba(255,255,255,.025)!important}
+.fond-store .orbite-point{position:absolute;width:10px;height:10px;border-radius:50%;background:#c9d6e4;box-shadow:0 0 14px rgba(201,214,228,.8);z-index:1;pointer-events:none}
+
+/* En-tête identique aux autres pages du site */
+header{--white:#fff;--accent-gold:#c9a961}
+header>nav{font-family:'Segoe UI','Roboto','Inter',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;top:0}
+header>nav ul{margin:0;padding:0}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header>nav{position:fixed;width:100%;background:rgba(10,22,40,.97);backdrop-filter:blur(10px);padding:1rem 0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+header .nav-container{max-width:1400px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;position:relative}
+header .logo{display:flex;align-items:center;position:absolute;left:2rem}
+header .logo img{height:60px;width:auto}
+header .nav-links{display:flex;gap:1.8rem;list-style:none;margin:0 auto}
+header .nav-links a{color:var(--white);text-decoration:none;font-size:.95rem;transition:color .3s;position:relative}
+header .nav-links a:hover,header .nav-links a[aria-current]{color:var(--accent-gold)}
+header .nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--accent-gold);transition:width .3s}
+header .nav-links a:hover::after,header .nav-links a[aria-current]::after{width:100%}
+header .nav-linkedin{position:absolute;right:2rem;display:flex;align-items:center;gap:.6rem;color:var(--white);text-decoration:none;font-size:.95rem;transition:color .3s}
+header .nav-linkedin:hover{color:var(--accent-gold)}
+@media (max-width:1250px){.nav-linkedin-text{display:none}}
+@media (max-width:900px){header .nav-container{flex-wrap:wrap;row-gap:.75rem;padding:0 1rem}
+header .logo{position:static}
+header .logo img{height:44px}
+header .nav-linkedin{position:static;margin-left:auto}
+header .nav-links{order:3;width:100%;margin:0;gap:1.25rem;overflow-x:auto;white-space:nowrap;padding-bottom:.25rem;scrollbar-width:none}
+header .nav-links::-webkit-scrollbar{display:none}}
+
+.nova-lockup{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px;color:#8fb6dc;--nl-h:40px}
+.nova-lockup .nl-mark{display:block;height:var(--nl-h);width:auto}
+.nova-lockup .nl-word{display:block;height:calc(var(--nl-h) * 860 / 1482);width:auto}
+.nova-lockup.grand{--nl-h:56px}
+.logo a{display:inline-flex;text-decoration:none}
+@media (min-width:901px){.nav-container{min-height:70px}.nav-container>.logo{top:50%;transform:translateY(-50%)}}
+@media (max-width:1250px){.nav-linkedin-text{display:inline}}
+@media (max-width:1000px){.nav-linkedin-text{display:none}}
+.nav-toggle{display:none;background:none;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:.45rem .7rem;font-size:1.2rem;line-height:1;cursor:pointer}
+@media (max-width:600px){.article-wrap{padding:2.5rem 1.1rem}.related,.blog-list{padding-left:1.1rem!important;padding-right:1.1rem!important}.card{padding:1.5rem}}
+@media (max-width:900px){
+.nova-lockup{--nl-h:32px}
+.nav-toggle{display:inline-block;order:2;margin-left:.8rem}
+.nav-linkedin{order:1;margin-left:auto!important}
+.nav-links{display:none!important;flex-direction:column;align-items:flex-start;gap:.2rem!important;overflow:visible!important;white-space:normal!important;padding:.8rem 0 .4rem!important;border-top:1px solid rgba(255,255,255,.12)}
+.nav-links.ouvert{display:flex!important}
+.nav-links a{display:block;padding:.55rem 0;font-size:1rem}
+.nav-links a::after{display:none}
+}
+
+
+/* NOVA PLAY : couleur dorée */
+:root { --play: #e8c26a; }
+.bloc-app.play { --accent: var(--play); --cap: var(--play); }
+/* Logo NOVA STORE en tête de page */
+.hero-logo-store { display: block; height: 64px; width: auto; margin: 0 0 1.4rem; }
+@media (max-width: 700px) { .hero-logo-store { height: 44px; margin-bottom: 1rem; } }
+
+/* Menu à 8 entrées : espacement resserré sur les écrans intermédiaires */
+@media (min-width:901px) and (max-width:1100px){header nav ul,nav.nav-principale ul{gap:1.1rem!important}header nav ul a,nav.nav-principale ul a{font-size:.9rem!important}}
+@media (min-width:901px) and (max-width:980px){header nav ul,nav.nav-principale ul{gap:.8rem!important}header nav ul a,nav.nav-principale ul a{font-size:.85rem!important}}
+
+/* Présentation centrée : 6 plateformes en 2 lignes de 3 */
+.presentation .intro{margin-left:auto;margin-right:auto;text-align:center}
+.presentation .hero-relance{margin-left:auto;margin-right:auto;text-align:center}
+.hero-cartes{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1080px;margin:2.2rem auto 0;gap:1.25rem}
+@media (max-width:1100px){.hero-cartes{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px}}
+@media (max-width:768px){.hero-cartes{grid-template-columns:1fr;max-width:480px}}
+
+/* NOVA PLAY : visuel entier */
+#nova-play .bloc-capture img{aspect-ratio:1293/816;object-position:center}
+
+/* Logos des titres de blocs */
+.bloc-app .titre-visuel .logo,.hero-cartes .lockup .logo{position:static!important;left:auto!important;top:auto!important;transform:none!important;display:block;flex-shrink:0}
+
+.lien-jeux{color:#e9c46a;font-weight:600;text-decoration:none}.lien-jeux:hover{text-decoration:underline}
+</style>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://www.nova-serenity.fr/nova-store.html#webpage", "url": "https://www.nova-serenity.fr/nova-store.html", "name": "Nos outils : le Nova Store de NOVA Serenity", "description": "Présentation détaillée des six plateformes web Nova DESK, Nova Life, Nova Space, Nova Tempo, Nova PASS et Nova PLAY.", "inLanguage": "fr-FR", "isPartOf": {"@id": "https://www.nova-serenity.fr/#website"}, "about": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "breadcrumb": {"@id": "https://www.nova-serenity.fr/nova-store.html#breadcrumb"}, "mainEntity": {"@id": "https://www.nova-serenity.fr/#nova-store"}, "primaryImageOfPage": {"@type": "ImageObject", "url": "https://www.nova-serenity.fr/images/nova-life.jpg"}}, {"@type": "BreadcrumbList", "@id": "https://www.nova-serenity.fr/nova-store.html#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.nova-serenity.fr/"}, {"@type": "ListItem", "position": 2, "name": "Nova Store", "item": "https://www.nova-serenity.fr/nova-store.html"}]}, {"@type": "ItemList", "@id": "https://www.nova-serenity.fr/#nova-store", "name": "Nova Store — les plateformes web NOVA Serenity", "description": "Suite de plateformes web responsive conçues par NOVA Serenity, accessibles depuis un navigateur sans installation : conciergerie d'entreprise, hospitality et animations, réservation de salles de réunion gestion des temps des hôtes et hôtesses, jeux et challenges en entreprise.", "numberOfItems": 6, "itemListElement": [{"@type": "ListItem", "position": 1, "item": {"@id": "https://www.nova-serenity.fr/#app-nova-desk"}}, {"@type": "ListItem", "position": 2, "item": {"@id": "https://www.nova-serenity.fr/#app-nova-life"}}, {"@type": "ListItem", "position": 3, "item": {"@id": "https://www.nova-serenity.fr/#app-nova-space"}}, {"@type": "ListItem", "position": 4, "item": {"@id": "https://www.nova-serenity.fr/#app-nova-tempo"}}, {"@type": "ListItem", "position": 5, "item": {"@id": "https://www.nova-serenity.fr/#app-nova-pass"}}, {"@type": "ListItem", "position": 6, "item": {"@id": "https://www.nova-serenity.fr/#app-nova-play"}}]}, {"@type": "WebApplication", "@id": "https://www.nova-serenity.fr/#app-nova-desk", "url": "https://www.nova-serenity.fr/nova-store.html#nova-desk", "name": "Nova DESK", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Conciergerie d'entreprise", "operatingSystem": "Tous systèmes — accès par navigateur web", "browserRequirements": "Navigateur web récent, interface responsive ordinateur, tablette et mobile", "inLanguage": "fr-FR", "description": "Plateforme web de conciergerie d'entreprise. Les collaborateurs commandent depuis leur navigateur une retouche, un repassage, un passage en cordonnerie ou une prestation de confort. Dépôt et retrait se font directement à l'accueil, pris en charge par les hôtes et hôtesses.", "featureList": ["Retouche de vêtements", "Repassage et pressing", "Cordonnerie", "Services de confort et de bien-être", "Commande en ligne et retrait à l'accueil"], "publisher": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "provider": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}}, {"@type": "WebApplication", "@id": "https://www.nova-serenity.fr/#app-nova-life", "url": "https://www.nova-serenity.fr/nova-store.html#nova-life", "name": "Nova Life", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Hospitality et animation des espaces d'accueil", "operatingSystem": "Tous systèmes — accès par navigateur web", "browserRequirements": "Navigateur web récent, interface responsive ordinateur, tablette et mobile", "inLanguage": "fr-FR", "description": "Plateforme web d'hospitality réunissant l'ensemble des animations activables sur les sites d'accueil : temps forts saisonniers, ateliers bien-être, moments gourmands et opérations de cohésion, avec demande d'activation en ligne.", "featureList": ["Bar à crêpes et gaufres", "Bar à smoothies et jus frais", "Candy bar et bonbons rétro", "Bar à popcorn sucré et salé", "Atelier cocktails et mocktails", "Foodtruck éphémère : burgers, tacos ou sushis", "Bar à churros", "Atelier chocolat : dégustation ou fabrication", "Café gourmand et café de spécialité", "Corner fruits frais et smoothie vélo", "Bar à glaces et yaourts glacés", "Cours de pilates ou yoga", "Séances de méditation et sophrologie", "Massages assis de 5 à 10 minutes", "Atelier respiration et gestion du stress", "Réflexologie plantaire", "Naturopathe et conseils nutrition", "Sieste flash et cocon détente", "Atelier sonore aux bols tibétains", "Mini-séances de stretching et renforcement", "Luminothérapie et bar à tisanes", "Bar à ongles express", "Bilan postural et prévention des TMS", "Barbershop éphémère", "Cours de boxe ou cardio-boxing", "Olympiades inter-équipes", "Escape game en équipe", "Atelier cuisine collaboratif", "Quiz et blind test inter-services", "Tournoi de babyfoot ou ping-pong", "Atelier percussions ou chant en groupe", "Chasse au trésor dans les locaux", "Team building créatif : peinture ou poterie", "Karaoké géant", "Fresque du Climat ou du Numérique", "Atelier fleurs et bar à plantes", "Photobooth avec accessoires", "Caricaturiste ou dessinateur en direct", "Bien-être digital : déconnexion et tri des e-mails", "Marché de producteurs locaux sur site", "Bar à selfies et bornes photo personnalisées", "Family Day / Family Kid", "Octobre Rose et Movember", "Studio photo collaborateurs", "Photographe événementiel", "Atelier révision vélos et trottinettes", "Lavage écologique sans eau"], "publisher": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "image": "https://www.nova-serenity.fr/images/nova-life.jpg", "provider": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}}, {"@type": "WebApplication", "@id": "https://www.nova-serenity.fr/#app-nova-space", "url": "https://www.nova-serenity.fr/nova-store.html#nova-space", "name": "Nova Space", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Réservation de salles de réunion", "operatingSystem": "Tous systèmes — accès par navigateur web", "browserRequirements": "Navigateur web récent, interface responsive ordinateur, tablette et mobile", "inLanguage": "fr-FR", "description": "Plateforme web de gestion et de réservation des salles de réunion en temps réel : consultation des disponibilités, réservation en quelques secondes, vision partagée avec l'équipe d'accueil et suivi du taux d'occupation.", "featureList": ["Réservation de salles de réunion en temps réel", "Visualisation des disponibilités", "Gestion des équipements et des configurations", "Suivi du taux d'occupation des espaces"], "publisher": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "provider": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}}, {"@type": "WebApplication", "@id": "https://www.nova-serenity.fr/#app-nova-tempo", "url": "https://www.nova-serenity.fr/nova-store.html#nova-tempo", "name": "Nova Tempo", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Gestion et déclaration des temps", "operatingSystem": "Tous systèmes — accès par navigateur web", "browserRequirements": "Navigateur web récent, interface responsive ordinateur, tablette et mobile", "inLanguage": "fr-FR", "description": "Plateforme web de déclaration des temps des hôtes et hôtesses d'accueil : chaque présence est enregistrée par site, chaque remplacement est tracé, et un reporting mensuel rend la prestation vérifiable.", "featureList": ["Déclaration des heures par site", "Suivi des présences et des remplacements", "Contrôle de la conformité des prestations", "Reporting mensuel pour le client"], "publisher": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "provider": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}}, {"@type": "WebApplication", "@id": "https://www.nova-serenity.fr/#app-nova-pass", "url": "https://www.nova-serenity.fr/nova-store.html#nova-pass", "name": "Nova PASS", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Accueil et registre des visiteurs", "operatingSystem": "Tous systèmes — accès par navigateur web", "browserRequirements": "Navigateur web récent, interface responsive ordinateur, tablette et mobile", "inLanguage": "fr-FR", "description": "Plateforme web d'accueil des visiteurs : déclaration et renseignement à l'accueil par QR code ou formulaire, alimentation automatique du registre des visiteurs et notification immédiate de la personne visitée.", "featureList": ["Déclaration du visiteur par QR code ou formulaire", "Renseignement guidé à l'accueil", "Registre des visiteurs alimenté automatiquement", "Notification immédiate de la personne visitée", "Historique des visites exportable"], "publisher": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "provider": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}}, {"@type": "WebApplication", "@id": "https://www.nova-serenity.fr/#app-nova-play", "url": "https://www.nova-serenity.fr/nova-store.html#nova-play", "name": "Nova PLAY", "applicationCategory": "GameApplication", "applicationSubCategory": "Jeux et challenges en entreprise", "operatingSystem": "Tous systèmes — accès par navigateur web", "inLanguage": "fr-FR", "description": "Plateforme web de jeux accessibles depuis le navigateur, pour se détendre pendant la pause, seul ou entre collègues, et organiser des challenges ludiques avec comparaison des scores.", "featureList": ["Nova Breaker : casse-briques", "Nova Invaders : défi des vagues spatiales", "Nova Rush : orienter les visiteurs vers leur destination", "Nova Snake : guider le serpent et récolter les étoiles", "Nova Drop : empiler les pièces et grimper au classement", "Challenges entre collègues et comparaison des scores"], "publisher": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}, "provider": {"@id": "https://www.nova-serenity.fr/#nova-accueil-et-services"}}, {"@type": "FAQPage", "@id": "https://www.nova-serenity.fr/nova-store.html#faq", "isPartOf": {"@id": "https://www.nova-serenity.fr/nova-store.html#webpage"}, "mainEntity": [{"@type": "Question", "name": "Faut-il installer une application pour utiliser le Nova Store ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Les six plateformes sont des sites web responsive accessibles depuis un navigateur, sur ordinateur, tablette et mobile. Aucun téléchargement, aucun passage par un magasin d'applications, aucun déploiement à prévoir avec votre direction informatique."}}, {"@type": "Question", "name": "Le Nova Store est-il inclus dans la prestation d'accueil ?", "acceptedAnswer": {"@type": "Answer", "text": "Les plateformes sont mises à disposition dans le cadre de nos prestations d'accueil et d'hospitality. Le périmètre exact est défini avec vous lors du cadrage, selon le nombre de sites, le volume de collaborateurs et les services retenus."}}, {"@type": "Question", "name": "Combien de temps faut-il pour déployer le Nova Store sur un site ?", "acceptedAnswer": {"@type": "Answer", "text": "Comme il n'y a rien à installer, la mise à disposition est rapide : il suffit de paramétrer les services, les espaces et les équipes concernées, puis de communiquer l'adresse aux collaborateurs. Le délai dépend surtout du catalogue de services retenu et des validations internes de votre côté."}}]}]}</script>
+</head>
+
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="nova-mark" viewBox="0 0 4452 1482"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTphN2VjY2FhMC02MGQwLTRkNzktYmI0Mi1kZTU0M2NiYWE3ZmIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaKqSkKwC5gir/7pN4VCJoeoAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpmOTI3NWU5OS02OGU1LTQxZmYtYTE2Yi04ZjY0NWUwNzMwMDdscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoIrySIiBuAcr86c/M2mdhBwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggevhw/YQfX1PTAqjTl+OMmBrhbn6Peqc8JodPIFKyfiWkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaI5/eI+GFG81+TEjwVuzNbQAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCAtUROncCkOXWAKteUCKypVMW0v2Gj6DNUmAMAVctFPO2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBieZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmE3ZWNjYWEwLTYwZDAtNGQ3OS1iYjQyLWRlNTQzY2JhYTdmYi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjUwZjA3N2YzLTdhMjgtNGJmMS1iMTQ5LTFmYWU4M2U3ZTFlNXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB6+HD9hB9fU9MCqNOX44yYGuFufo96pzwmh08gUrJ+JaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggjoG6mj5xAO0NL5LKptrWmvtT/GOcaN2cicP9Wyj69KmiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggPipwVcXGj8sSOXY4D0/EkCXoQFjxQM1mbcVk1cHhbJp0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKAYE+JFrb1RwuNtyEaazFIUT4R6QYhmsIx7sfT9nbJFM68JAc8GUE8LIZangFi5bVrvsdc6/wHv2UF+oR4Eha8=</c2pa:manifest></metadata><g fill="var(--nova-letter,#8fb6dc)" fill-rule="evenodd"><path d="M8 399C8 400 8 575 8 788L8 1177L10 1178C14 1179 147 1178 149 1177C150 1174 149 658 148 654C147 651 147 650 148 647C149 645 150 641 150 631C150 624 150 618 151 618C151 618 157 624 164 633C179 653 183 656 189 659C195 662 197 664 198 671C199 674 200 677 202 680C204 683 207 688 209 691C211 694 215 699 216 701C218 703 221 708 224 711C228 716 233 722 241 731C243 734 247 739 248 742C249 744 252 747 254 749C255 750 258 753 259 756C261 759 264 763 266 765C267 766 270 770 272 773C274 776 277 779 278 781C280 783 283 786 284 789C286 792 289 795 290 797C291 799 294 803 296 806C298 809 302 814 304 817C306 820 310 824 312 827C320 838 327 846 328 847C328 847 330 850 332 853C334 856 336 859 338 861C339 862 341 866 343 869C345 872 349 876 351 879C353 881 356 884 357 886C358 888 360 891 362 892C363 894 366 898 368 901C370 904 374 909 376 912C387 926 389 928 393 935C395 938 398 942 399 943C400 943 402 947 404 950C406 953 409 957 412 959C414 961 416 965 418 968C419 970 422 973 423 975C425 977 428 981 430 984C432 987 434 990 435 991C436 991 439 995 441 999C443 1002 446 1006 448 1007C449 1008 451 1012 454 1016C456 1019 459 1023 460 1025C462 1027 464 1030 466 1032C468 1037 480 1051 484 1054C485 1055 487 1058 489 1061C490 1064 493 1069 495 1072C497 1075 501 1079 503 1083C505 1086 508 1090 510 1092C513 1095 520 1105 525 1112C527 1115 530 1119 533 1121C535 1123 537 1127 538 1129C539 1130 542 1134 544 1137C546 1139 549 1143 550 1145C551 1147 554 1151 557 1154C559 1157 563 1163 565 1166C567 1169 570 1173 572 1175L576 1178L641 1178C692 1178 706 1178 707 1177C708 1176 708 1125 708 905C708 757 708 582 708 518C709 454 709 400 709 400C709 399 694 399 639 399L570 399L570 588C570 731 570 784 571 808C573 836 573 843 571 865C570 879 569 902 569 917C569 932 568 944 568 944C567 945 555 930 546 918C540 910 533 904 529 901C527 900 526 899 526 897C526 894 522 888 519 886C517 885 515 882 514 880C512 874 510 871 494 851C493 848 489 843 486 840C477 828 472 821 469 820C468 819 466 815 464 812C462 808 459 803 457 800C455 798 452 794 450 792C449 790 446 786 444 783C441 781 438 776 435 772C433 769 428 763 425 758C422 754 418 748 416 746C412 741 405 732 398 722C395 719 391 714 389 710C381 700 357 667 346 654C344 651 337 642 332 636C327 629 322 621 320 619C313 610 296 587 293 583C291 580 285 573 281 567C276 560 270 553 268 550C266 547 260 540 256 535C252 529 246 522 244 519C242 516 237 509 233 504C228 499 223 492 221 488C218 485 212 477 208 471C190 447 176 429 171 422C165 413 159 406 155 402L152 399L81 399C41 399 9 399 8 399Z"/><path d="M1473 389C1451 390 1424 394 1408 397C1396 400 1385 403 1378 405C1374 406 1369 407 1368 408C1365 408 1354 412 1340 417C1338 418 1335 419 1333 419C1325 422 1288 441 1276 449C1273 451 1270 453 1270 453C1270 453 1267 455 1264 457C1261 460 1258 462 1257 462C1257 462 1254 463 1252 465C1250 467 1247 469 1245 470C1243 471 1241 472 1240 474C1239 475 1236 477 1234 478C1230 481 1228 483 1216 494C1213 497 1206 503 1202 507C1198 511 1193 515 1192 517C1191 518 1188 522 1184 525C1181 529 1179 532 1179 532C1179 533 1176 536 1174 538C1171 541 1168 545 1166 548C1165 550 1163 553 1161 554C1160 556 1157 559 1155 562C1154 565 1151 569 1149 571C1147 574 1144 578 1144 580C1143 582 1140 587 1137 591C1134 595 1132 599 1132 600C1132 601 1130 604 1128 608C1121 620 1119 626 1118 631C1117 634 1115 639 1113 642C1111 645 1109 651 1108 654C1107 657 1104 666 1102 673C1097 690 1096 692 1094 708C1093 715 1091 728 1089 737L1086 753L1086 790C1086 821 1086 827 1088 835C1090 848 1092 858 1094 870C1096 886 1098 897 1103 912C1105 916 1107 923 1109 927C1110 931 1112 936 1114 939C1115 942 1117 947 1118 951C1120 955 1122 961 1124 963C1126 966 1128 971 1130 974C1132 981 1134 983 1137 989C1139 991 1142 996 1143 999C1146 1005 1151 1012 1159 1023C1161 1026 1165 1030 1166 1033C1168 1036 1171 1040 1173 1042C1175 1043 1178 1047 1180 1050C1182 1053 1184 1056 1185 1056C1186 1056 1188 1059 1191 1062C1195 1067 1217 1088 1229 1097C1232 1100 1237 1104 1239 1106C1241 1108 1244 1110 1244 1110C1244 1110 1247 1112 1251 1114C1254 1117 1257 1119 1258 1119C1259 1119 1261 1121 1264 1123C1267 1126 1269 1128 1270 1128C1270 1128 1273 1129 1275 1131C1278 1132 1280 1134 1280 1134C1280 1134 1283 1135 1287 1137C1300 1145 1334 1161 1345 1164C1346 1164 1352 1166 1359 1168C1371 1173 1378 1175 1387 1177C1390 1178 1396 1179 1399 1180C1431 1188 1493 1193 1529 1189C1535 1189 1544 1188 1550 1188C1587 1184 1631 1173 1671 1156C1675 1154 1688 1149 1690 1147C1691 1147 1695 1145 1699 1142C1704 1140 1708 1138 1709 1138C1709 1137 1715 1134 1721 1130C1737 1121 1759 1105 1769 1096C1791 1077 1808 1060 1820 1045C1825 1040 1830 1033 1832 1031C1835 1027 1848 1008 1856 995C1862 986 1873 965 1877 955C1879 950 1881 946 1882 945C1882 944 1883 941 1885 938C1886 935 1887 930 1888 929C1890 923 1898 897 1900 889C1907 859 1909 847 1911 821C1914 779 1912 738 1903 701C1898 680 1898 679 1889 653C1864 576 1804 499 1735 456C1717 444 1709 439 1691 430C1674 422 1639 409 1618 403C1602 399 1600 399 1593 397C1555 389 1514 386 1473 389ZM1524 518C1541 519 1556 522 1572 527C1575 528 1580 529 1583 530C1591 532 1599 535 1603 537C1606 539 1608 540 1608 540C1611 540 1648 559 1652 562C1653 564 1656 566 1658 567C1664 571 1671 576 1674 579C1676 581 1681 586 1687 591C1692 596 1698 602 1699 603C1700 605 1703 609 1705 610C1707 612 1710 616 1711 618C1712 621 1715 625 1717 627C1719 629 1722 633 1723 636C1725 639 1728 644 1730 647C1732 650 1734 655 1735 657C1737 660 1739 666 1742 670C1744 674 1747 679 1747 680C1747 682 1752 698 1755 705C1757 710 1758 715 1761 730C1761 733 1762 738 1763 740C1763 741 1764 746 1764 749C1764 752 1765 758 1766 762C1768 776 1768 801 1766 817C1761 843 1760 849 1759 857C1757 864 1757 866 1751 882C1750 886 1748 892 1747 895C1746 898 1745 902 1744 903C1744 904 1740 910 1737 917C1728 935 1722 944 1717 950C1715 953 1712 958 1711 960C1710 962 1707 965 1706 967C1704 968 1701 971 1699 974C1698 977 1695 980 1694 981C1692 982 1686 987 1680 993C1674 999 1669 1004 1668 1004C1668 1004 1665 1006 1663 1008C1660 1011 1657 1013 1657 1013C1656 1013 1654 1014 1652 1016C1649 1018 1638 1024 1620 1033C1569 1059 1502 1068 1450 1057C1423 1051 1404 1045 1391 1039C1382 1035 1368 1028 1366 1027C1341 1012 1330 1004 1310 984C1296 971 1279 949 1272 936C1270 933 1267 928 1265 926C1264 923 1263 921 1263 921C1263 921 1255 905 1253 900C1251 896 1243 874 1241 865C1239 858 1236 843 1234 830C1231 814 1231 765 1234 749C1239 718 1245 694 1254 674C1257 670 1259 664 1260 662C1267 647 1284 621 1301 602C1310 592 1346 561 1349 561C1349 561 1351 559 1354 558C1363 552 1387 540 1390 540C1390 540 1392 539 1393 538C1398 536 1417 529 1429 526C1442 523 1445 522 1450 522C1453 521 1456 520 1457 520C1460 518 1509 516 1524 518Z"/><path d="M3980 401C3979 402 3976 409 3974 416C3971 423 3967 432 3966 435C3964 439 3963 442 3963 443C3963 443 3961 446 3960 450C3955 461 3953 465 3950 474C3949 476 3946 483 3944 490C3941 496 3937 504 3936 509C3934 513 3932 519 3930 523C3928 527 3926 532 3925 535C3924 538 3921 544 3919 549C3917 554 3915 559 3915 559C3915 561 3909 576 3906 582C3904 586 3902 591 3901 595C3899 598 3897 604 3895 607C3892 613 3890 619 3888 626C3887 627 3885 632 3883 637C3880 642 3879 646 3879 646C3879 647 3872 664 3871 665C3870 666 3868 670 3867 675C3865 680 3862 688 3859 692C3857 696 3854 704 3853 710C3851 715 3848 722 3846 725C3845 728 3842 734 3841 737C3840 740 3837 747 3835 751C3832 758 3830 763 3828 770C3827 771 3825 775 3823 780C3821 784 3819 790 3817 794C3816 797 3814 803 3812 808C3810 812 3807 819 3805 823C3804 828 3801 835 3799 839C3797 844 3794 852 3791 857C3789 863 3787 869 3786 871C3785 873 3782 879 3780 885C3777 893 3775 898 3772 903C3772 904 3771 906 3771 907C3769 913 3764 924 3762 930C3760 933 3757 940 3756 945C3754 950 3751 956 3750 959C3747 964 3746 967 3742 978C3741 981 3739 987 3737 992C3734 996 3732 1002 3731 1006C3730 1009 3727 1015 3725 1020C3723 1024 3720 1030 3719 1034C3717 1037 3715 1043 3714 1046C3712 1049 3710 1055 3708 1059C3707 1063 3704 1070 3702 1073C3701 1076 3699 1079 3698 1081C3696 1087 3691 1100 3689 1104C3688 1107 3686 1113 3684 1117C3683 1121 3680 1128 3678 1132C3676 1136 3674 1141 3673 1143C3672 1145 3670 1151 3668 1156C3663 1167 3660 1174 3660 1176C3660 1178 3672 1178 3738 1178C3808 1178 3808 1178 3811 1174C3813 1169 3820 1151 3825 1138C3827 1133 3829 1126 3831 1123C3832 1120 3835 1114 3836 1110C3838 1105 3840 1098 3842 1095C3843 1092 3846 1084 3848 1079C3850 1073 3853 1065 3855 1061C3857 1057 3860 1051 3861 1047C3864 1037 3870 1026 3872 1025C3874 1024 4226 1024 4228 1025C4231 1026 4236 1036 4241 1050C4243 1056 4246 1063 4248 1066C4249 1069 4251 1074 4252 1077C4253 1080 4256 1087 4258 1092C4260 1097 4263 1104 4264 1108C4266 1111 4268 1117 4270 1122C4272 1126 4275 1132 4276 1136C4277 1140 4280 1146 4282 1150C4284 1154 4287 1161 4288 1165C4290 1170 4292 1175 4293 1176L4294 1178L4356 1178C4426 1179 4443 1178 4443 1176C4443 1174 4439 1165 4436 1159C4435 1157 4432 1150 4430 1144C4428 1138 4425 1131 4423 1127C4421 1123 4419 1117 4417 1112C4416 1108 4413 1102 4411 1098C4409 1094 4406 1087 4405 1083C4404 1079 4401 1072 4399 1068C4397 1064 4394 1058 4393 1054C4392 1050 4389 1045 4388 1042C4386 1039 4383 1033 4382 1028C4380 1022 4377 1016 4376 1014C4373 1007 4370 1001 4368 995C4367 992 4365 985 4363 981C4361 977 4358 970 4357 967C4356 964 4353 957 4351 953C4348 948 4346 941 4345 938C4343 935 4341 929 4339 926C4337 923 4334 916 4333 911C4332 907 4328 899 4326 894C4324 888 4321 882 4320 880C4319 877 4318 873 4316 870C4314 865 4312 861 4306 846C4305 843 4303 836 4301 832C4298 828 4296 823 4296 822C4296 820 4293 815 4291 811C4289 806 4286 799 4285 795C4283 790 4281 784 4278 780C4276 775 4274 769 4273 766C4269 756 4268 752 4265 747C4264 745 4262 740 4261 736C4259 732 4256 725 4254 720C4252 715 4249 709 4248 706C4246 701 4245 699 4241 692C4240 690 4238 685 4237 680C4236 676 4233 668 4230 663C4228 658 4225 652 4224 649C4223 646 4221 641 4219 637C4217 632 4214 624 4212 619C4210 613 4207 606 4206 603C4204 600 4201 593 4199 588C4197 583 4195 578 4194 578C4192 575 4191 572 4188 562C4186 557 4183 550 4182 547C4180 544 4177 538 4176 533C4174 528 4171 521 4170 518C4168 515 4166 509 4164 505C4163 501 4160 494 4158 489C4156 485 4153 479 4152 476C4150 469 4148 465 4145 461C4144 459 4142 453 4140 449C4139 445 4136 436 4134 431C4131 425 4128 417 4127 414C4124 404 4121 400 4119 399C4117 399 4086 399 4049 399L3982 399L3980 401ZM4055 594C4057 599 4060 607 4063 612C4065 617 4068 625 4070 630C4071 634 4074 641 4076 645C4078 650 4081 657 4083 663C4084 668 4087 675 4089 678C4090 681 4093 688 4095 694C4097 700 4101 709 4103 714C4105 720 4108 726 4109 729C4110 732 4112 737 4114 741C4116 746 4118 750 4119 752C4121 758 4123 763 4126 770C4128 774 4131 781 4132 785C4133 789 4136 795 4138 799C4140 803 4143 810 4144 814C4145 818 4148 826 4151 830C4153 835 4155 839 4155 839C4155 840 4159 851 4165 866C4166 867 4167 870 4168 873C4169 875 4172 881 4174 887C4180 900 4181 903 4178 905C4175 906 3927 906 3923 905C3919 904 3920 902 3928 884C3929 881 3931 877 3932 875C3933 872 3935 866 3938 860C3943 848 3944 845 3947 835C3949 830 3951 823 3953 820C3954 817 3957 812 3958 809C3959 806 3961 801 3963 798C3964 794 3966 789 3967 786C3970 780 3974 769 3976 764C3979 757 3980 756 3982 748C3983 744 3986 737 3988 733C3992 726 3994 720 3996 713C3996 710 3998 705 4000 701C4002 698 4004 692 4006 688C4007 684 4010 677 4012 673C4015 666 4022 649 4022 646C4022 646 4023 644 4024 641C4027 637 4029 630 4033 618C4033 615 4035 611 4037 608C4041 600 4046 590 4047 586C4048 581 4051 584 4055 594Z"/></g><g fill="var(--nova-mark,#4084c8)"><path d="M3232 0C3232 1 3229 3 3225 4C3217 8 3208 16 3194 30C3188 36 3132 92 3068 155C3004 219 2947 276 2941 283C2920 305 2918 306 2898 306C2883 306 2876 304 2868 296C2849 279 2843 272 2831 259C2829 258 2827 255 2825 254C2823 252 2821 250 2820 249C2819 247 2816 244 2814 242C2812 240 2806 235 2801 229C2795 224 2790 219 2789 219C2788 219 2787 217 2786 216C2785 213 2630 58 2620 49C2595 28 2564 23 2538 36C2536 37 2531 40 2529 41C2526 42 2523 45 2522 46C2521 48 2518 50 2516 52C2514 53 2509 58 2504 62C2500 67 2481 85 2463 104L2429 138L2423 150C2416 165 2415 169 2415 185C2415 200 2416 205 2423 219C2429 231 2431 233 2478 280C2499 300 2524 325 2534 335C2666 466 2713 512 2733 532C2747 545 2768 566 2780 579C2793 591 2805 602 2806 603C2808 604 2810 606 2811 607C2812 609 2816 614 2821 619C2849 647 2852 649 2863 656C2878 666 2911 668 2929 659C2932 658 2935 657 2935 657C2938 656 2972 624 3165 431C3421 176 3398 199 3402 192C3404 189 3406 184 3407 182C3416 167 3416 128 3407 116C3405 114 3403 110 3402 108C3402 106 3398 101 3395 97C3380 81 3311 12 3306 9C3300 5 3294 3 3293 3C3292 3 3291 2 3291 1C3290 -0 3233 -0 3232 0Z"/><path d="M2135 239C2135 250 2135 332 2135 420L2136 581L2151 597C2171 617 2172 618 2177 620C2180 622 2182 623 2183 627C2185 630 2186 632 2189 633C2191 634 2193 636 2194 639C2196 641 2198 644 2200 646C2202 647 2205 650 2206 652C2211 658 2221 667 2225 668C2229 669 2232 671 2232 675C2232 677 2235 682 2238 682C2239 682 2240 683 2241 685C2242 687 2246 692 2249 696C2253 699 2259 705 2262 709C2266 713 2271 717 2273 718C2276 719 2278 721 2279 723C2281 726 2282 728 2286 729C2290 731 2291 733 2292 736C2293 739 2294 741 2297 743C2300 745 2303 748 2304 750C2307 755 2319 765 2321 765C2325 765 2327 768 2328 771C2329 776 2331 778 2335 780C2338 780 2339 781 2339 784C2339 785 2342 788 2344 790C2346 792 2349 795 2350 796C2357 804 2368 815 2371 817C2373 817 2375 820 2376 822C2377 824 2380 827 2383 829C2385 831 2388 833 2388 834C2388 836 2416 864 2420 866C2421 867 2423 869 2425 871C2426 873 2428 876 2431 878C2433 879 2436 882 2437 885C2439 887 2441 890 2444 891C2446 893 2448 894 2448 895C2448 896 2466 914 2468 915C2469 915 2471 918 2473 920C2474 923 2477 925 2479 926C2482 928 2484 930 2484 931C2484 932 2488 936 2491 939C2494 943 2501 949 2505 954C2510 959 2514 963 2515 963C2515 963 2518 965 2521 967C2524 970 2528 973 2529 973C2530 974 2532 975 2533 976C2543 983 2572 988 2585 984C2612 977 2610 979 2672 917C2707 881 2709 878 2717 863C2726 843 2725 816 2715 796C2709 784 2704 778 2657 733C2611 687 2486 563 2452 529C2439 516 2400 478 2367 444C2333 411 2300 379 2294 373C2288 367 2258 338 2229 309C2199 279 2166 247 2156 237C2146 227 2137 219 2136 219C2135 219 2135 220 2135 239Z"/><path d="M3521 359C3516 361 3501 376 3393 484C3343 534 3283 594 3259 617C3235 641 3214 661 3213 663C3211 664 3204 672 3197 679C3162 712 3091 783 3032 842C2997 878 2967 908 2965 909C2964 910 2962 913 2960 915C2958 917 2954 921 2952 922C2949 926 2913 962 2906 969C2904 971 2896 979 2888 987C2865 1009 2862 1013 2860 1016C2859 1019 2857 1020 2854 1021C2852 1022 2849 1025 2848 1026C2847 1028 2844 1031 2841 1034C2838 1037 2836 1040 2835 1041C2835 1044 2833 1045 2830 1047C2828 1048 2826 1050 2826 1051C2825 1051 2824 1053 2824 1055C2823 1056 2821 1058 2819 1059C2817 1060 2814 1063 2813 1065C2811 1069 2808 1072 2805 1072C2803 1072 2788 1085 2787 1088C2787 1089 2785 1091 2782 1093C2780 1094 2777 1098 2776 1100C2774 1104 2772 1106 2769 1107C2767 1108 2765 1110 2764 1113C2762 1115 2760 1117 2758 1118C2756 1119 2749 1125 2743 1131C2737 1137 2732 1142 2731 1142C2731 1142 2729 1144 2728 1146C2726 1149 2723 1152 2721 1153C2719 1155 2716 1157 2715 1159C2714 1160 2712 1163 2710 1164C2707 1166 2687 1185 2678 1195C2674 1199 2667 1206 2663 1209C2662 1211 2656 1217 2650 1222C2645 1228 2640 1233 2638 1234C2637 1235 2635 1237 2634 1239C2632 1240 2628 1244 2625 1248C2621 1251 2618 1255 2618 1257C2617 1258 2615 1260 2613 1261C2609 1263 2596 1275 2594 1280C2593 1282 2591 1285 2589 1287C2583 1293 2582 1301 2582 1326C2582 1350 2583 1357 2588 1361C2590 1363 2592 1366 2593 1369C2594 1375 2606 1388 2613 1391C2616 1392 2617 1393 2618 1396C2618 1398 2620 1401 2624 1405C2627 1408 2636 1416 2643 1424C2667 1449 2678 1460 2686 1465C2714 1481 2735 1483 2761 1472C2779 1465 2772 1471 2925 1318C3046 1198 3411 833 3417 827C3418 826 3426 817 3436 808C3445 799 3453 791 3454 790C3454 789 3465 779 3478 766C3490 753 3501 743 3501 742C3502 741 3509 734 3513 731C3514 730 3517 727 3520 724C3523 721 3526 718 3527 717C3528 714 3528 699 3529 549C3529 387 3529 370 3526 361C3525 356 3525 356 3521 359Z"/></g></symbol></svg>
+<a class="lien-evitement" href="#contenu">Aller au contenu principal</a>
+
+<header>
+<nav aria-label="Navigation principale">
+<div class="nav-container">
+<div class="logo"><a href="nova-serenity-with-intro-video1.html" aria-label="NOVA Serenity, page d’accueil"><span class="nova-lockup "><svg class="nl-mark" viewBox="0 0 4452 1482" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg><svg class="nl-word" viewBox="0 0 4452 860" aria-hidden="true" focusable="false"><text x="8" y="640" textLength="4435" lengthAdjust="spacing" font-size="800" font-weight="600" font-family="Segoe UI, Roboto, Inter, -apple-system, sans-serif" fill="currentColor">Serenity</text></svg></span></a></div>
+<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="menu-principal"><span aria-hidden="true">☰</span><span class="visually-hidden">Ouvrir le menu</span></button>
+<ul class="nav-links" id="menu-principal">
+<li><a href="nova-serenity-with-intro-video1.html#apropos">À propos</a></li>
+<li><a href="nova-serenity-with-intro-video1.html#poles">Pôles</a></li>
+<li><a href="nova-store.html" aria-current="page">Outils</a></li>
+<li><a href="nova-serenity-with-intro-video1.html#club">Club</a></li>
+<li><a href="play.html">Play</a></li>
+<li><a href="blog/index.html">Blog</a></li>
+<li><a href="nova-serenity-with-intro-video1.html#faq">FAQ</a></li>
+<li><a href="nova-serenity-with-intro-video1.html#contact">Contact</a></li>
+</ul>
+<a class="nav-linkedin" href="https://www.linkedin.com/company/nova-serenity-group/posts/" target="_blank" rel="noopener" aria-label="Suivez NOVA Serenity sur LinkedIn (nouvel onglet)"><span class="nav-linkedin-text">Suivez-nous</span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+</div>
+</nav>
+</header>
+
+<nav class="fil-ariane" aria-label="Fil d'Ariane">
+    <ol>
+        <li><a href="nova-serenity-with-intro-video1.html">Accueil</a></li>
+        <li aria-current="page">Nos outils : Nova Store</li>
+    </ol>
+</nav>
+
+<main id="contenu">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+        <div class="hero-contenu">
+            <div class="hero-texte">
+                <img class="hero-logo-store" src="images/store/logo-nova-store.svg" alt="Nova Store" width="7602" height="1482">
+                    <span class="hero-surtitre">Nos plateformes web</span>
+                <h1>
+                    Vos collaborateurs au cœur, jusque dans nos outils.
+                    <span class="fin">Six plateformes pour simplifier l’accueil, accompagner vos équipes et partager des moments de détente.</span>
+                </h1>
+                <p class="hero-chapeau">
+                    Conciergerie, animations, jeux et réservation de salles : vos collaborateurs se servent
+                    eux-mêmes depuis leur navigateur. Déclaration des temps : vos gestionnaires et nos
+                    hôtes et hôtesses suivent l'activité au même endroit.
+                </p>
+                <div class="hero-boutons">
+                    <a class="bouton bouton-principal" href="#nova-desk">Découvrir les plateformes</a>
+                    <a class="bouton bouton-secondaire" href="mailto:aurelie.godin@nova-serenity.fr?subject=Nova%20Store%20%E2%80%94%20demande%20de%20d%C3%A9monstration&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20une%20d%C3%A9monstration%20du%20Nova%20Store.%0A%0ASoci%C3%A9t%C3%A9%20%3A%20%0ANombre%20de%20sites%20%3A%20%0APlateformes%20qui%20m%27int%C3%A9ressent%20%3A%20%0A%0ACordialement%2C%0A">Demander une démonstration</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PRÉSENTATION ET CARTES ===================== -->
+    <div class="fond-store">
+<span class="orbite-point" style="top:540px;right:3%" aria-hidden="true"></span><span class="orbite-point" style="top:38%;left:9%" aria-hidden="true"></span>
+<section class="presentation">
+        <div class="conteneur">
+            <p class="intro">
+                Nova Store réunit, en un seul espace, les outils conçus par NOVA Serenity pour
+                simplifier le quotidien des collaborateurs présents sur vos sites et donner à vos
+                gestionnaires comme à nos hôtes et hôtesses une vision claire de l'activité.
+            </p>
+            <p class="intro">
+                Six plateformes complémentaires, pensées pour répondre à l'ensemble des besoins
+                d'un accueil professionnel :
+            </p>
+
+                <ul class="hero-cartes">
+                    <li style="--accent: var(--desk);">
+                    <a href="#nova-desk">
+                        <span class="lockup">
+                            <svg class="logo" width="90" height="30" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                            <span class="lockup-mot">DESK</span>
+                        </span>
+                        <span class="carte-role">Conciergerie d'entreprise</span>
+                        <span class="carte-desc">Un service de conciergerie digitalisé, simple à mettre en place et à faire vivre.</span>
+                    </a>
+                </li>
+                    <li style="--accent: var(--life);">
+                    <a href="#nova-life">
+                        <span class="lockup">
+                            <svg class="logo" width="90" height="30" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                            <span class="lockup-mot">Life</span>
+                        </span>
+                        <span class="carte-role">Hospitality et animations</span>
+                        <span class="carte-desc">Pour organiser, valoriser et faire rayonner la vie de vos sites.</span>
+                    </a>
+                </li>
+                    <li style="--accent: var(--space);">
+                    <a href="#nova-space">
+                        <span class="lockup">
+                            <svg class="logo" width="90" height="30" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                            <span class="lockup-mot">Space</span>
+                        </span>
+                        <span class="carte-role">Réservation des salles</span>
+                        <span class="carte-desc">Une gestion fluide et centralisée des espaces partagés.</span>
+                    </a>
+                </li>
+                    <li style="--accent: var(--tempo);">
+                    <a href="#nova-tempo">
+                        <span class="lockup">
+                            <svg class="logo" width="90" height="30" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                            <span class="lockup-mot">Tempo</span>
+                        </span>
+                        <span class="carte-role">Gestion des temps</span>
+                        <span class="carte-desc">Un suivi clair et fiable des plannings et des présences.</span>
+                    </a>
+                </li>
+                    <li style="--accent: var(--pass);">
+                    <a href="#nova-pass">
+                        <span class="lockup">
+                            <svg class="logo" width="90" height="30" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                            <span class="lockup-mot">PASS</span>
+                        </span>
+                        <span class="carte-role">Accueil des visiteurs</span>
+                        <span class="carte-desc">Déclaration et renseignement à l'accueil, registre des visiteurs alimenté automatiquement.</span>
+                    </a>
+                </li>
+                <li style="--accent: var(--play);">
+                        <a href="#nova-play">
+                            <span class="lockup">
+                                <svg class="logo" width="90" height="30" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                <span class="lockup-mot">Play</span>
+                            </span>
+                            <span class="carte-role">Jeux et challenges</span>
+                            <span class="carte-desc">Des jeux pour souffler pendant la pause et des défis entre collègues.</span>
+                        </a>
+                    </li>
+                </ul>
+
+            <p class="intro" style="margin-top:2.25rem;">
+                Chaque solution est accessible sous forme de site web responsive, utilisable directement
+                depuis un navigateur, sur ordinateur, tablette ou mobile. Rien à installer, aucun
+                déploiement informatique de votre côté : vos équipes sont opérationnelles dès la mise
+                en service.
+            </p>
+
+            <p class="hero-relance">
+                Avec Nova Store, choisissez les outils dont vous avez besoin, quand vous en avez besoin,
+                et donnez à vos hôtes et hôtesses les moyens de se concentrer sur
+                <strong>l'essentiel : l'expérience de vos collaborateurs et de vos visiteurs.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- ===================== PLATEFORMES ===================== -->
+    <section>
+        <div class="conteneur">
+
+            <!-- ---------- NOVA DESK ---------- -->
+            <article class="bloc-app desk" id="nova-desk" aria-labelledby="titre-desk">
+                <div class="bloc-texte">
+                    <div class="bloc-entete">
+                        <span class="pastille" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                                <path d="M12 7.5v2.2l8.2 5.1a1.6 1.6 0 0 1-.85 2.95H4.65a1.6 1.6 0 0 1-.85-2.95L12 9.7"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="etiquette">Conciergerie d'entreprise</span>
+                            <h2 id="titre-desk" class="titre-lockup">
+                                <span class="hors-ecran">NOVA DESK</span>
+                                <span class="titre-visuel" aria-hidden="true">
+                                    <svg class="logo" width="150" height="50" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                    <span class="titre-mot">DESK</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        NOVA DESK met les services du quotidien à portée de vos collaborateurs. Depuis leur
+                        navigateur, ils commandent une retouche, un repassage, un passage en cordonnerie ou
+                        une prestation de confort. Dépôt et retrait se font directement à l'accueil, pris
+                        en charge par nos hôtes et hôtesses.
+                    </p>
+                    <p>
+                        L'intérêt dépasse la simple commodité. Chaque course que vos collaborateurs n'ont
+                        plus à faire le samedi est du temps rendu à leur vie personnelle. C'est l'un des
+                        leviers les plus concrets de la qualité de vie au travail — et l'un des plus
+                        visibles au quotidien.
+                    </p>
+
+                    <ul class="liste-atouts">
+                        <li>Retouche de vêtements</li>
+                        <li>Repassage et pressing</li>
+                        <li>Cordonnerie</li>
+                        <li>Services de confort et de bien-être</li>
+                        <li>Commande en ligne, dépôt et retrait à l'accueil</li>
+                    </ul>
+
+                    <p class="encart">
+                        Le catalogue est adapté à chaque site selon les prestataires partenaires disponibles
+                        localement et les attentes de vos collaborateurs.
+                    </p>
+                </div>
+
+                <div class="bloc-visuel">
+
+                    <figure class="bloc-capture">
+                        <img src="images/store/capture-nova-desk.webp"
+                             alt="Interface de NOVA DESK : dépôt d'une prestation de conciergerie en 30 secondes depuis le bureau"
+                             width="1600" height="900" loading="lazy" decoding="async">
+                        <figcaption>L'interface NOVA DESK telle que la voient vos collaborateurs.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <!-- ---------- NOVA LIFE ---------- -->
+            <article class="bloc-app life" id="nova-life" aria-labelledby="titre-life">
+                <div class="bloc-texte">
+                    <div class="bloc-entete">
+                        <span class="pastille" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2.6 14.1 8l5.9.3-4.6 3.7 1.6 5.7L12 14.6l-5 3.1 1.6-5.7L4 8.3 9.9 8Z"/>
+                                <path d="M19 18.5v3M17.5 20h3"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="etiquette">Hospitality et animations</span>
+                            <h2 id="titre-life" class="titre-lockup">
+                                <span class="hors-ecran">NOVA LIFE</span>
+                                <span class="titre-visuel" aria-hidden="true">
+                                    <svg class="logo" width="150" height="50" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                    <span class="titre-mot">Life</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        NOVA LIFE réunit l'ensemble des animations activables sur vos sites d'accueil.
+                        Temps forts saisonniers, ateliers bien-être, moments gourmands, opérations de
+                        cohésion : vos équipes découvrent l'offre et en font la demande directement en ligne.
+                    </p>
+                    <p>
+                        C'est ce qui transforme un hall d'accueil en véritable lieu de vie. Une animation
+                        bien choisie crée un moment partagé, donne une raison supplémentaire de venir au
+                        bureau, et laisse une trace concrète de l'attention portée à vos collaborateurs.
+                    </p>
+
+                    <ul class="liste-atouts">
+                        <li>Catalogue complet des animations proposées</li>
+                        <li>Temps forts saisonniers et moments gourmands</li>
+                        <li>Ateliers sport, bien-être et relaxation</li>
+                        <li>Planification des animations site par site</li>
+                        <li>Demande d'activation en ligne</li>
+                    </ul>
+
+                    <p class="encart">
+                        Le catalogue évolue tout au long de l'année, au fil des retours de vos collaborateurs.
+                    </p>
+                </div>
+
+                <div class="bloc-visuel">
+                    <figure class="bloc-capture">
+                        <img src="images/store/capture-nova-life.webp"
+                             alt="NOVA LIFE : bar à smoothies animé par une hôtesse NOVA dans l'espace hospitality d'un siège d'entreprise, avec atelier bien-être en arrière-plan"
+                             width="1600" height="900" loading="lazy" decoding="async">
+                        <figcaption>NOVA LIFE sur site : un bar à smoothies et un atelier bien-être animés par nos équipes.</figcaption>
+                    </figure>
+
+                </div>
+            <div class="catalogue-life">
+<h3 id="titre-catalogue-life" class="catalogue-titre">Catalogue des animations NOVA LIFE</h3>
+<p class="catalogue-intro">Choisissez un univers pour découvrir les animations activables sur vos sites, à la carte ou en programme annuel.</p>
+<div class="catalogue-inter">
+<div class="themes-life" role="tablist" aria-label="Univers d'animations" aria-orientation="vertical"><button type="button" role="tab" class="theme-life" id="tab-life-0" aria-controls="panneau-life" aria-selected="true" tabindex="0" data-index="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 9h2a2 2 0 0 1 0 4h-2"/><path d="M8 3v2M11 3v2"/></svg><span class="theme-nom">Gourmand</span><span class="theme-nb">11</span></button><button type="button" role="tab" class="theme-life" id="tab-life-1" aria-controls="panneau-life" aria-selected="false" tabindex="-1" data-index="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-4-3-8-6.5-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 3.5C20 14.5 16 18 12 21z"/></svg><span class="theme-nom">Bien-être</span><span class="theme-nb">13</span></button><button type="button" role="tab" class="theme-life" id="tab-life-2" aria-controls="panneau-life" aria-selected="false" tabindex="-1" data-index="2"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.5c2.8.2 5 2.5 5 5.5"/></svg><span class="theme-nom">Cohésion / Dynamique</span><span class="theme-nb">11</span></button><button type="button" role="tab" class="theme-life" id="tab-life-3" aria-controls="panneau-life" aria-selected="false" tabindex="-1" data-index="3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z"/><path d="M18 15l.8 2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><span class="theme-nom">Expériences originales</span><span class="theme-nb">12</span></button></div>
+<div class="panneau-life" id="panneau-life" role="tabpanel" aria-labelledby="tab-life-0" aria-live="polite">
+<p class="panneau-titre">Gourmand</p>
+<ul class="activites"><li class="activite"><strong>Bar à crêpes et gaufres</strong></li><li class="activite"><strong>Bar à smoothies et jus frais</strong></li><li class="activite"><strong>Candy bar et bonbons rétro</strong></li><li class="activite"><strong>Bar à popcorn sucré et salé</strong></li><li class="activite"><strong>Atelier cocktails et mocktails</strong></li><li class="activite"><strong>Foodtruck éphémère : burgers, tacos ou sushis</strong></li><li class="activite"><strong>Bar à churros</strong></li><li class="activite"><strong>Atelier chocolat : dégustation ou fabrication</strong></li><li class="activite"><strong>Café gourmand et café de spécialité</strong></li><li class="activite"><strong>Corner fruits frais et smoothie vélo</strong></li><li class="activite"><strong>Bar à glaces et yaourts glacés</strong></li></ul>
+</div>
+</div>
+<noscript><ul><li>Gourmand : Bar à crêpes et gaufres, Bar à smoothies et jus frais, Candy bar et bonbons rétro, Bar à popcorn sucré et salé, Atelier cocktails et mocktails, Foodtruck éphémère : burgers, tacos ou sushis, Bar à churros, Atelier chocolat : dégustation ou fabrication, Café gourmand et café de spécialité, Corner fruits frais et smoothie vélo, Bar à glaces et yaourts glacés</li><li>Bien-être : Cours de pilates ou yoga, Séances de méditation et sophrologie, Massages assis de 5 à 10 minutes, Atelier respiration et gestion du stress, Réflexologie plantaire, Naturopathe et conseils nutrition, Sieste flash et cocon détente, Atelier sonore aux bols tibétains, Mini-séances de stretching et renforcement, Luminothérapie et bar à tisanes, Bar à ongles express, Bilan postural et prévention des TMS, Barbershop éphémère</li><li>Cohésion / Dynamique : Cours de boxe ou cardio-boxing, Olympiades inter-équipes, Escape game en équipe, Atelier cuisine collaboratif, Quiz et blind test inter-services, Tournoi de babyfoot ou ping-pong, Atelier percussions ou chant en groupe, Chasse au trésor dans les locaux, Team building créatif : peinture ou poterie, Karaoké géant, Fresque du Climat ou du Numérique</li><li>Expériences originales : Atelier fleurs et bar à plantes, Photobooth avec accessoires, Caricaturiste ou dessinateur en direct, Bien-être digital : déconnexion et tri des e-mails, Marché de producteurs locaux sur site, Bar à selfies et bornes photo personnalisées, Family Day / Family Kid, Octobre Rose et Movember, Studio photo collaborateurs, Photographe événementiel, Atelier révision vélos et trottinettes, Lavage écologique sans eau</li></ul></noscript>
+</div>
+<script>
+(function(){
+var D=[["Gourmand", [["Bar à crêpes et gaufres", ""], ["Bar à smoothies et jus frais", ""], ["Candy bar et bonbons rétro", ""], ["Bar à popcorn sucré et salé", ""], ["Atelier cocktails et mocktails", ""], ["Foodtruck éphémère : burgers, tacos ou sushis", ""], ["Bar à churros", ""], ["Atelier chocolat : dégustation ou fabrication", ""], ["Café gourmand et café de spécialité", ""], ["Corner fruits frais et smoothie vélo", ""], ["Bar à glaces et yaourts glacés", ""]]], ["Bien-être", [["Cours de pilates ou yoga", ""], ["Séances de méditation et sophrologie", ""], ["Massages assis de 5 à 10 minutes", ""], ["Atelier respiration et gestion du stress", ""], ["Réflexologie plantaire", ""], ["Naturopathe et conseils nutrition", ""], ["Sieste flash et cocon détente", ""], ["Atelier sonore aux bols tibétains", ""], ["Mini-séances de stretching et renforcement", ""], ["Luminothérapie et bar à tisanes", ""], ["Bar à ongles express", "Manucure flash de 15 à 20 minutes"], ["Bilan postural et prévention des TMS", "Conseils ergonomiques individuels"], ["Barbershop éphémère", "Taille de barbe et coupe soignée au bureau"]]], ["Cohésion / Dynamique", [["Cours de boxe ou cardio-boxing", ""], ["Olympiades inter-équipes", ""], ["Escape game en équipe", ""], ["Atelier cuisine collaboratif", ""], ["Quiz et blind test inter-services", ""], ["Tournoi de babyfoot ou ping-pong", ""], ["Atelier percussions ou chant en groupe", ""], ["Chasse au trésor dans les locaux", ""], ["Team building créatif : peinture ou poterie", ""], ["Karaoké géant", ""], ["Fresque du Climat ou du Numérique", "Atelier collectif de sensibilisation RSE"]]], ["Expériences originales", [["Atelier fleurs et bar à plantes", ""], ["Photobooth avec accessoires", ""], ["Caricaturiste ou dessinateur en direct", ""], ["Bien-être digital : déconnexion et tri des e-mails", ""], ["Marché de producteurs locaux sur site", ""], ["Bar à selfies et bornes photo personnalisées", ""], ["Family Day / Family Kid", "Accueil des familles, ateliers enfants, maquillage, magicien, arbre de Noël"], ["Octobre Rose et Movember", "Stands de sensibilisation, collecte solidaire, challenges connectés"], ["Studio photo collaborateurs", "Portraits LinkedIn, trombinoscope, badges"], ["Photographe événementiel", "Reportage de séminaires, afterworks, inaugurations"], ["Atelier révision vélos et trottinettes", "Un technicien sur le parking de l'entreprise"], ["Lavage écologique sans eau", "Les véhicules des collaborateurs pendant leurs réunions"]]]];
+var tabs=[].slice.call(document.querySelectorAll('.theme-life'));
+var panel=document.getElementById('panneau-life'); if(!panel||!tabs.length) return;
+var titre=panel.querySelector('.panneau-titre'), liste=panel.querySelector('.activites'), cur=0;
+function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+function show(i,focus){
+  if(i===cur&&!focus) return; cur=i;
+  tabs.forEach(function(t,k){var on=k===i;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;});
+  panel.setAttribute('aria-labelledby','tab-life-'+i);
+  titre.textContent=D[i][0];
+  liste.innerHTML=D[i][1].map(function(a,k){return '<li class="activite entre" style="animation-delay:'+(k*60)+'ms"><strong>'+esc(a[0])+'</strong>'+(a[1]?'<span>'+esc(a[1])+'</span>':'')+'</li>';}).join('');
+  if(focus) tabs[i].focus();
+}
+tabs.forEach(function(t,k){
+  t.addEventListener('mouseenter',function(){show(k);});
+  t.addEventListener('focus',function(){show(k);});
+  t.addEventListener('click',function(){show(k);});
+  t.addEventListener('keydown',function(e){
+    var n=null;
+    if(e.key==='ArrowDown'||e.key==='ArrowRight') n=(k+1)%tabs.length;
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft') n=(k-1+tabs.length)%tabs.length;
+    if(e.key==='Home') n=0; if(e.key==='End') n=tabs.length-1;
+    if(n!==null){e.preventDefault();show(n,true);}
+  });
+});
+})();
+</script>
+</article>
+
+            <!-- ---------- NOVA SPACE ---------- -->
+            <article class="bloc-app space" id="nova-space" aria-labelledby="titre-space">
+                <div class="bloc-texte">
+                    <div class="bloc-entete">
+                        <span class="pastille" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="16" rx="2.5"/>
+                                <path d="M3 9.5h18M9 9.5V20"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="etiquette">Réservation de salles</span>
+                            <h2 id="titre-space" class="titre-lockup">
+                                <span class="hors-ecran">NOVA SPACE</span>
+                                <span class="titre-visuel" aria-hidden="true">
+                                    <svg class="logo" width="150" height="50" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                    <span class="titre-mot">Space</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        NOVA SPACE gère la réservation de vos salles de réunion en temps réel. Vos équipes
+                        consultent les disponibilités, réservent en quelques secondes et retrouvent leurs
+                        réservations depuis n'importe quel poste.
+                    </p>
+                    <p>
+                        Côté accueil, la valeur est immédiate : nos hôtes et hôtesses disposent d'une vision
+                        complète des espaces occupés. Ils orientent les visiteurs sans appeler personne, savent
+                        quelle salle préparer et à quelle heure, et repèrent les réservations non honorées qui
+                        bloquent inutilement des espaces.
+                    </p>
+
+                    <ul class="liste-atouts">
+                        <li>Disponibilité des salles en temps réel</li>
+                        <li>Réservation depuis un navigateur, ordinateur ou mobile</li>
+                        <li>Gestion des équipements et des configurations</li>
+                        <li>Vision partagée avec l'équipe d'accueil</li>
+                        <li>Suivi du taux d'occupation des espaces</li>
+                    </ul>
+
+                    <p class="encart">
+                        Les données d'occupation vous aident à arbitrer sur le dimensionnement de vos espaces
+                        de réunion.
+                    </p>
+                </div>
+
+                <div class="bloc-visuel">
+
+                    <figure class="bloc-capture">
+                        <img src="images/store/capture-nova-space.webp"
+                             alt="Interface de NOVA SPACE : catalogue des salles de réunion disponibles avec capacité et étage"
+                             width="1600" height="900" loading="lazy" decoding="async">
+                        <figcaption>L'interface NOVA SPACE et le choix des espaces disponibles.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <!-- ---------- NOVA TEMPO ---------- -->
+            <article class="bloc-app tempo" id="nova-tempo" aria-labelledby="titre-tempo">
+                <div class="bloc-texte">
+                    <div class="bloc-entete">
+                        <span class="pastille" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 2"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="etiquette">Gestion des temps</span>
+                            <h2 id="titre-tempo" class="titre-lockup">
+                                <span class="hors-ecran">NOVA TEMPO</span>
+                                <span class="titre-visuel" aria-hidden="true">
+                                    <svg class="logo" width="150" height="50" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                    <span class="titre-mot">Tempo</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        NOVA TEMPO est la plateforme de déclaration des temps de nos hôtes et hôtesses. Chaque
+                        présence est enregistrée par site, chaque remplacement est tracé, chaque écart est
+                        documenté.
+                    </p>
+                    <p>
+                        Pour vous, c'est la réponse à une question que se pose tout donneur d'ordre : les
+                        heures facturées correspondent-elles aux heures réellement effectuées ? Vous recevez un
+                        reporting mensuel qui rend la prestation vérifiable, sans avoir à nous croire sur parole.
+                    </p>
+
+                    <ul class="liste-atouts">
+                        <li>Déclaration des heures site par site</li>
+                        <li>Suivi des présences et des remplacements</li>
+                        <li>Contrôle de la conformité des prestations</li>
+                        <li>Reporting mensuel transmis au client</li>
+                        <li>Facturation adossée aux heures réellement réalisées</li>
+                    </ul>
+
+                    <p class="encart">
+                        Particulièrement utile dans les configurations multisites, où le suivi manuel devient
+                        vite ingérable.
+                    </p>
+                </div>
+
+                <div class="bloc-visuel">
+                    
+                
+                    <figure class="bloc-capture">
+                        <img src="images/store/capture-nova-tempo.webp"
+                             alt="Interface NOVA TEMPO : écran de pointage avec l'heure, l'affectation du jour et le bouton pour pointer son arrivée"
+                             width="1600" height="900" loading="lazy" decoding="async">
+                        <figcaption>L'écran de pointage NOVA TEMPO tel que le voient nos hôtes et hôtesses.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <!-- ---------- NOVA PASS ---------- -->
+            <article class="bloc-app pass" id="nova-pass" aria-labelledby="titre-pass">
+                <div class="bloc-texte">
+                    <div class="bloc-entete">
+                        <span class="pastille" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/>
+                                <path d="M7 9h4v4H7Z"/><path d="M14 9.5h3.5M14 13h3.5M7 16.5h10"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="etiquette">Accueil des visiteurs</span>
+                            <h2 id="titre-pass" class="titre-lockup">
+                                <span class="hors-ecran">NOVA PASS</span>
+                                <span class="titre-visuel" aria-hidden="true">
+                                    <svg class="logo" width="150" height="50" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                    <span class="titre-mot">PASS</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        NOVA PASS prend en charge la déclaration et le renseignement des visiteurs à l'accueil.
+                        Le visiteur scanne un QR code depuis son téléphone, ou remplit le formulaire mis à sa
+                        disposition sur la borne d'accueil : nom, société, personne visitée, motif de la visite.
+                    </p>
+                    <p>
+                        Chaque arrivée alimente automatiquement le registre des visiteurs, consultable et
+                        exportable à tout moment. L'hôte visité est prévenu immédiatement, sans que l'équipe
+                        d'accueil ait à passer un appel, et le temps d'attente au comptoir se réduit d'autant.
+                    </p>
+
+                    <ul class="liste-atouts">
+                        <li>Déclaration du visiteur par QR code ou formulaire</li>
+                        <li>Renseignement guidé à l'accueil, en français et en anglais</li>
+                        <li>Registre des visiteurs alimenté automatiquement</li>
+                        <li>Notification immédiate de la personne visitée</li>
+                        <li>Historique des visites consultable et exportable</li>
+                    </ul>
+
+                    <p class="encart">
+                        Le parcours visiteur est adapté à vos règles de site : badge, consignes de sécurité,
+                        accompagnement obligatoire ou accès libre.
+                    </p>
+                </div>
+
+                <div class="bloc-visuel">
+                    <figure class="bloc-capture">
+                        <img src="images/store/capture-nova-pass.webp"
+                             alt="Écran NOVA PASS « Bienvenue chez Nova Serenity » : QR code d'enregistrement des visiteurs, présenté par une hôtesse sur une tablette"
+                             width="944" height="528" loading="lazy" decoding="async">
+                        <figcaption>Bienvenue chez Nova Serenity : l'accueil des visiteurs en un QR code.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+            <!-- ---------- NOVA PLAY ---------- -->
+            <article class="bloc-app play" id="nova-play" aria-labelledby="titre-play">
+                <div class="bloc-texte">
+                    <div class="bloc-entete">
+                        <span class="pastille" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8h12a4 4 0 0 1 4 4v1a4 4 0 0 1-7 2.6L14 15h-4l-1 .6A4 4 0 0 1 2 13v-1a4 4 0 0 1 4-4Z"/>
+                                <path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r=".6"/><circle cx="18" cy="13.5" r=".6"/>
+                            </svg>
+                        </span>
+                        <div>
+                            <span class="etiquette">Jeux et challenges en entreprise</span>
+                            <h2 id="titre-play" class="titre-lockup">
+                                <span class="hors-ecran">NOVA PLAY</span>
+                                <span class="titre-visuel" aria-hidden="true">
+                                    <svg class="logo" width="150" height="50" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+                                    <span class="titre-mot">Play</span>
+                                </span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <p>
+                        Une pause déjeuner pour déconnecter, quelques minutes pour se détendre : NOVA PLAY
+                        rassemble des jeux accessibles depuis le navigateur, à son rythme, seul ou entre collègues.
+                    </p>
+                    <p>
+                        Pour animer la vie de l’entreprise, les équipes peuvent aussi se retrouver autour de
+                        challenges ludiques et comparer leurs scores.
+                    </p>
+
+                    <ul class="liste-atouts">
+                        <li>Nova Breaker : cassez les briques à votre rythme</li>
+                        <li>Nova Invaders : relevez le défi des vagues spatiales</li>
+                        <li>Nova Rush : orientez les visiteurs vers leur destination</li>
+                        <li>Nova Snake : guidez le serpent et récoltez les étoiles</li>
+<li>Nova Drop : empilez les pièces et grimpez au classement</li>
+                    </ul>
+
+                    <p><a href="play.html" class="lien-jeux">Découvrir les cinq jeux NOVA PLAY →</a></p>
+<p class="encart">
+                        Une parenthèse légère pendant la pause, ou un défi collectif pour créer des moments de convivialité.
+                    </p>
+                </div>
+
+                <div class="bloc-visuel">
+                    <figure class="bloc-capture">
+                        <img src="images/store/capture-nova-play.webp"
+                             alt="Logo NOVA PLAY : le logo NOVA et le mot PLAY construits en briques colorées"
+                             width="1293" height="816" loading="lazy" decoding="async">
+                        <figcaption>NOVA PLAY : des jeux pour souffler pendant la pause.</figcaption>
+                    </figure>
+                </div>
+            </article>
+
+
+        </div>
+    </section>
+
+    <!-- ===================== PARCOURS ===================== -->
+    <section class="bande-claire" aria-labelledby="titre-parcours">
+        <div class="conteneur">
+            <div class="titre-section">
+                <h2 id="titre-parcours">Comment cela se met en place</h2>
+                <p>Trois étapes, sans projet informatique de votre côté</p>
+            </div>
+
+            <div class="parcours">
+                <div class="etape">
+                    <p class="etape-numero" aria-hidden="true">1</p>
+                    <h3>Nous cadrons ensemble</h3>
+                    <p>
+                        Nous définissons les services, les animations et les espaces à intégrer, site par site,
+                        selon vos collaborateurs et vos contraintes.
+                    </p>
+                </div>
+                <div class="etape">
+                    <p class="etape-numero" aria-hidden="true">2</p>
+                    <h3>Nous paramétrons</h3>
+                    <p>
+                        Nous configurons les plateformes à vos couleurs et à votre organisation. Rien à installer,
+                        rien à faire valider par votre direction informatique.
+                    </p>
+                </div>
+                <div class="etape">
+                    <p class="etape-numero" aria-hidden="true">3</p>
+                    <h3>Vos équipes utilisent</h3>
+                    <p>
+                        Un lien à communiquer, et le service est actif. Nos hôtes et hôtesses accompagnent la
+                        prise en main sur site dès les premiers jours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== ATOUTS ===================== -->
+    <section aria-labelledby="titre-atouts">
+        <div class="conteneur">
+            <div class="titre-section">
+                <h2 id="titre-atouts">Pourquoi des plateformes web plutôt que des applications</h2>
+                <p>Un choix technique aux conséquences très concrètes pour vos équipes</p>
+            </div>
+
+            <div class="grille-atouts">
+                <div class="atout">
+                    <span class="atout-icone" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v10m0 0 3.5-3.5M12 13 8.5 9.5"/><path d="M4 15v4h16v-4"/>
+                        </svg>
+                    </span>
+                    <h3>Rien à installer</h3>
+                    <p>
+                        Vos collaborateurs ouvrent un lien et utilisent le service. Pas de téléchargement,
+                        pas de compte à créer sur un magasin d'applications, pas de mise à jour à gérer.
+                    </p>
+                </div>
+
+                <div class="atout">
+                    <span class="atout-icone" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 12.5l2.2 2.2L15.5 10"/><path d="M12 3.2 4.5 6v5.4c0 4.4 3.1 8.1 7.5 9.4 4.4-1.3 7.5-5 7.5-9.4V6Z"/>
+                        </svg>
+                    </span>
+                    <h3>Pas de projet informatique</h3>
+                    <p>
+                        Aucun déploiement à faire valider par votre direction informatique, aucun logiciel à
+                        installer sur les postes. Le frein habituel à ce type d'outil disparaît.
+                    </p>
+                </div>
+
+                <div class="atout">
+                    <span class="atout-icone" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2.5" y="4.5" width="13" height="10" rx="2"/><rect x="17" y="9" width="4.5" height="10.5" rx="1.5"/><path d="M6 18.5h5"/>
+                        </svg>
+                    </span>
+                    <h3>Accessible partout</h3>
+                    <p>
+                        Ordinateur au bureau, tablette à l'accueil ou téléphone personnel : l'interface s'adapte
+                        à l'écran. Un collaborateur en télétravail y accède comme les autres.
+                    </p>
+                </div>
+
+                <div class="atout">
+                    <span class="atout-icone" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 11.5A8 8 0 0 0 6.3 6.3L4 8.5"/><path d="M4 4.5v4h4"/>
+                            <path d="M4 12.5a8 8 0 0 0 13.7 5.2l2.3-2.2"/><path d="M20 19.5v-4h-4"/>
+                        </svg>
+                    </span>
+                    <h3>Évolutif sans friction</h3>
+                    <p>
+                        Une nouvelle animation ou un nouveau service apparaît immédiatement pour tout le monde,
+                        sans attendre qu'une mise à jour soit installée sur chaque appareil.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="bande-claire" aria-labelledby="titre-faq">
+        <div class="conteneur">
+            <div class="titre-section">
+                <h2 id="titre-faq">Questions fréquentes sur le Nova Store</h2>
+            </div>
+
+            <div class="grille-faq">
+                <div class="faq-item">
+                    <h3><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-r1">
+                        <span>Faut-il installer une application pour utiliser le Nova Store ?</span>
+                        <span class="faq-icone" aria-hidden="true">+</span>
+                    </button></h3>
+                    <div class="faq-reponse" id="faq-r1"><div><p>Non. Les six plateformes sont des sites web responsive accessibles depuis un navigateur, sur ordinateur, tablette et mobile. Aucun téléchargement, aucun passage par un magasin d'applications, aucun déploiement à prévoir avec votre direction informatique.</p></div></div>
+                </div>
+
+                <div class="faq-item">
+                    <h3><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-r2">
+                        <span>Le Nova Store est-il inclus dans la prestation d'accueil ?</span>
+                        <span class="faq-icone" aria-hidden="true">+</span>
+                    </button></h3>
+                    <div class="faq-reponse" id="faq-r2"><div><p>Les plateformes sont mises à disposition dans le cadre de nos prestations d'accueil et d'hospitality. Le périmètre exact est défini avec vous lors du cadrage, selon le nombre de sites, le volume de collaborateurs et les services retenus.</p></div></div>
+                </div>
+
+                <div class="faq-item">
+                    <h3><button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-r3">
+                        <span>Combien de temps faut-il pour déployer le Nova Store sur un site ?</span>
+                        <span class="faq-icone" aria-hidden="true">+</span>
+                    </button></h3>
+                    <div class="faq-reponse" id="faq-r3"><div><p>Comme il n'y a rien à installer, la mise à disposition est rapide : il suffit de paramétrer les services, les espaces et les équipes concernées, puis de communiquer l'adresse aux collaborateurs. Le délai dépend surtout du catalogue de services retenu et des validations internes de votre côté.</p></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== APPEL À L'ACTION ===================== -->
+    <section class="bande-action" aria-labelledby="titre-action">
+        <div class="conteneur">
+            <h2 id="titre-action">Voir le Nova Store en fonctionnement</h2>
+            <p>
+                Nous vous proposons une démonstration sur votre site, avec le catalogue de services et
+                d'animations adapté à vos collaborateurs.
+            </p>
+            <div class="boutons">
+                <a class="bouton bouton-principal" href="mailto:aurelie.godin@nova-serenity.fr?subject=Nova%20Store%20%E2%80%94%20demande%20de%20d%C3%A9monstration&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20une%20d%C3%A9monstration%20du%20Nova%20Store.%0A%0ASoci%C3%A9t%C3%A9%20%3A%20%0ANombre%20de%20sites%20%3A%20%0APlateformes%20qui%20m%27int%C3%A9ressent%20%3A%20%0A%0ACordialement%2C%0A">Demander une démonstration</a>
+                <a class="bouton bouton-secondaire" href="nova-serenity-with-intro-video1.html#poles">Découvrir nos 4 pôles</a>
+            </div>
+        </div>
+    </section>
+
+</div>
+</main>
+
+<footer>
+    <div class="pied-contenu">
+        <a class="marque" href="nova-serenity-with-intro-video1.html" aria-label="NOVA Serenity">
+            <svg class="logo" width="132" height="44" aria-hidden="true" focusable="false"><use href="#nova-mark"/></svg>
+            <svg class="nl-word" viewBox="0 0 4452 860" aria-hidden="true" focusable="false"><text x="8" y="640" textLength="4435" lengthAdjust="spacing" font-size="800" font-weight="600" font-family="Segoe UI, Roboto, Inter, -apple-system, sans-serif" fill="currentColor">Serenity</text></svg>
+        </a>
+        <p class="pied-signature">« Plus qu'un nom, une vision »</p>
+        <p>NOVA : briller par l'humain, durer par la confiance.</p>
+
+        <nav aria-label="Navigation de pied de page">
+            <ul class="pied-liens">
+                <li><a href="nova-serenity-with-intro-video1.html">Accueil</a></li>
+                <li><a href="nova-serenity-with-intro-video1.html#poles">Nos pôles</a></li>
+                <li><a href="nova-store.html">Nova Store</a></li>
+                <li><a href="blog/index.html">Blog</a></li>
+                <li><a href="nova-serenity-with-intro-video1.html#contact">Contact</a></li>
+                <li><a href="hotesses-accueil-entreprise.html">Hôtesses d'accueil en entreprise</a></li>
+                <li><a href="conciergerie-entreprise.html">Conciergerie d'entreprise</a></li>
+                <li><a href="accueil-evenementiel.html">Accueil événementiel</a></li>
+                <li><a href="conseil-facility-management.html">Conseil en Facility Management</a></li>
+                <li><a href="blog/digitalisation-accueil-services-entreprise.html">Guide de la digitalisation de l'accueil</a></li>
+                <li><a href="mentions-legales.html">Mentions légales</a></li>
+                <li><a href="politique-de-confidentialite.html">Politique de confidentialité</a></li>
+            </ul>
+        </nav>
+
+<p class="footer-nap">NOVA Accueil et Services · 60 rue François 1er, 75008 Paris · <a href="tel:+33662316782">06 62 31 67 82</a></p>
+        <div class="pied-bas">
+            <p>© <span id="annee">2026</span> NOVA Serenity. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* =========================================================================
+   NOVA SERENITY — Nova Store
+   Comportements de la page. Aucune dépendance externe.
+
+   ========================================================================= */
+(function () {
+    'use strict';
+
+    var $  = function (sel, racine) { return (racine || document).querySelector(sel); };
+    var $$ = function (sel, racine) {
+        return Array.prototype.slice.call((racine || document).querySelectorAll(sel));
+    };
+
+    /* =====================================================================
+       NAVIGATION ET ÉLÉMENTS GLOBAUX
+       ===================================================================== */
+    function initGlobal() {
+        var annee = $('#annee');
+        if (annee) { annee.textContent = new Date().getFullYear(); }
+
+        var basculeNav = $('#nav-bascule');
+        var liens = $('#nav-liens');
+
+        if (basculeNav && liens) {
+            basculeNav.addEventListener('click', function () {
+                var ouvert = liens.classList.toggle('ouvert');
+                basculeNav.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+            });
+            liens.addEventListener('click', function (e) {
+                if (e.target.tagName === 'A') {
+                    liens.classList.remove('ouvert');
+                    basculeNav.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        var nav = $('.nav-principale');
+        if (nav) {
+            window.addEventListener('scroll', function () {
+                nav.classList.toggle('defile', window.scrollY > 80);
+            }, { passive: true });
+        }
+    }
+
+    /* =====================================================================
+       FAQ
+       ===================================================================== */
+    function initFaq() {
+        $$('.faq-question').forEach(function (bouton) {
+            bouton.addEventListener('click', function () {
+                var item = bouton.closest('.faq-item');
+                if (!item) { return; }
+                var ouvert = item.classList.toggle('ouvert');
+                bouton.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+            });
+        });
+    }
+
+    /* =====================================================================
+       APPARITION AU DÉFILEMENT
+       ===================================================================== */
+    function initApparition() {
+        var reduit = window.matchMedia
+            && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (reduit || !('IntersectionObserver' in window)) { return; }
+
+        var cibles = $$('.bloc-app, .etape, .atout, .faq-item');
+        cibles.forEach(function (el) { el.classList.add('apparition'); });
+
+        var observateur = new IntersectionObserver(function (entrees) {
+            entrees.forEach(function (entree) {
+                if (entree.isIntersecting) {
+                    entree.target.classList.add('visible');
+                    observateur.unobserve(entree.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+        cibles.forEach(function (el) { observateur.observe(el); });
+    }
+
+    /* =====================================================================
+       DÉMARRAGE
+       ===================================================================== */
+    function demarrer() {
+        initGlobal();
+        initFaq();
+        initApparition();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', demarrer);
+    } else {
+        demarrer();
+    }
+})();
+
+</script>
+<script>
+(function(){var b=document.querySelector('.nav-toggle'),m=document.getElementById('menu-principal');if(!b||!m)return;
+function t(o){m.classList.toggle('ouvert',o);b.setAttribute('aria-expanded',o?'true':'false');}
+b.addEventListener('click',function(){t(!m.classList.contains('ouvert'));});
+m.addEventListener('click',function(e){if(e.target.tagName==='A')t(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){t(false);}});})();
+</script>
+</body>
+</html>

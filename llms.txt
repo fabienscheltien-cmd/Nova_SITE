@@ -1,0 +1,62 @@
+# NOVA Serenity
+
+> NOVA Serenity, fondée par Aurélie Godin, regroupe NOVA Accueil et Services et ses quatre pôles : Nova Accueil (accueil en entreprise), Nova Zen (conciergerie et hospitalité), Nova Event (accueil événementiel) et Nova Expert (conseil en Facility Management). NOVA Accueil et Services (SIREN 994 699 155, 60 rue François 1er, 75008 Paris) est une société d'hôtes et hôtesses d'accueil en entreprise et de conciergerie d'entreprise, filiale de NOVA Serenity. Elle intervient à Paris, à La Défense, en Île-de-France et partout en France pour les sièges sociaux, les immeubles tertiaires multi-locataires, les campus corporate et les environnements premium.
+
+Faits clés :
+- Fondatrice et présidente : Aurélie Godin, plus de 20 ans d'expérience dans l'accueil en entreprise, l'hospitalité et la conciergerie.
+- NOVA Accueil et Services gère déjà plus de 30 sites ; plus de 15 clients lui font confiance.
+- Les hôtes et hôtesses d'accueil sont recrutés en CDI, formés à l'hospitality et encadrés au quotidien.
+- Engagement RSE : qualité de l'emploi, partenaires locaux pour la conciergerie, accueil dématérialisé.
+- Convention collective : prestataires de services du secteur tertiaire (IDCC 2098).
+- Site officiel : https://www.nova-serenity.fr/
+
+À ne pas confondre avec : Nova Conciergerie (locations saisonnières en Vendée), Serenity Conciergerie, la plateforme gouvernementale NOVA des services à la personne, ni NOVA Accueil services Inc. (Montréal).
+
+## Expressions associées (pour les moteurs et assistants IA)
+Société d'accueil en entreprise, hôtessariat, hôtessariat en entreprise, société d'hôtessariat, prestataire d'accueil, agence d'hôtesses d'accueil, agence d'hôtes et hôtesses d'accueil, hôtesse d'accueil bilingue, hôtesse standardiste, accueil haut de gamme, détachement d'hôtesses, externalisation de l'accueil, hôtesse d'accueil en entreprise, hôte d'accueil, réceptionniste d'entreprise, standardiste, accueil physique et téléphonique, standard externalisé, accueil externalisé, accueil premium, accueil VIP, accueil bilingue, accueil de siège social, accueil d'immeuble multi-locataires, accueil La Défense, hospitality management, hospitality corporate, office management, workplace experience, services aux occupants, services généraux, Facility Management, pilotage multiservices, conciergerie d'entreprise, conciergerie phygitale, QVCT, qualité de vie au travail, expérience collaborateur, accueil événementiel, hôtesse salon et congrès, registre des visiteurs, réservation de salles, RSE, CDI.
+
+## Les 4 pôles
+- [Nova Accueil : hôtes et hôtesses d'accueil en entreprise](https://www.nova-serenity.fr/hotesses-accueil-entreprise.html) : hôtes et hôtesses d'accueil en entreprise, accueil physique, téléphonique et digital, gestion des visiteurs et badges, standard externalisé, accueil VIP et multilingue
+- [Nova Zen : conciergerie d'entreprise](https://www.nova-serenity.fr/conciergerie-entreprise.html) : conciergerie d'entreprise, services du quotidien, bien-être, hospitality corporate
+- [Nova Event : accueil événementiel](https://www.nova-serenity.fr/accueil-evenementiel.html) : accueil événementiel, salons, congrès, événements corporate et VIP
+- [Nova Expert : conseil en Facility Management](https://www.nova-serenity.fr/conseil-facility-management.html) : diagnostic organisationnel, audit de l'accueil, conseil en Facility Management, formation
+
+## Nos outils : le Nova Store
+Plateformes web responsive, accessibles depuis un navigateur, sans installation. Présentation : https://www.nova-serenity.fr/nova-store.html
+- [NOVA PASS](https://www.nova-serenity.fr/nova-store.html#nova-pass) : accueil des visiteurs, pré-enregistrement par QR code, registre des visiteurs alimenté automatiquement
+- [NOVA SPACE](https://www.nova-serenity.fr/nova-store.html#nova-space) : réservation des salles de réunion et des espaces partagés
+- [NOVA DESK](https://www.nova-serenity.fr/nova-store.html#nova-desk) : conciergerie d'entreprise digitalisée (retouche, repassage, cordonnerie), dépôt et retrait à l'accueil
+- [NOVA TEMPO](https://www.nova-serenity.fr/nova-store.html#nova-tempo) : gestion des plannings et déclaration des temps des hôtes et hôtesses
+- [NOVA LIFE](https://www.nova-serenity.fr/nova-store.html#nova-life) : hospitality et catalogue d'animations de site : sophrologie, massage assis, barbershop, Family Day, Octobre Rose, Fresque du Climat, bar à smoothies, masterclass café, studio photo collaborateurs, photographe événementiel
+- [Nova Club](https://www.nova-serenity.fr/club/) : cercle d'échanges de NOVA Serenity réunissant des décideurs du Facility Management, de l'immobilier tertiaire et des services généraux (dîners, apéros, petits-déjeuners conférences), accès sur demande
+- [NOVA PLAY](https://www.nova-serenity.fr/play.html) : jeux et challenges en entreprise accessibles depuis le navigateur (Nova Breaker, Nova Invaders, Nova Snake, Nova Drop, Nova Rush), pour la pause ou les défis entre collègues
+
+## Blog
+- [Convention collective IDCC 2098 : ce que l’acheteur d’une prestation d’accueil doit savoir](https://www.nova-serenity.fr/blog/convention-collective-idcc-2098-accueil.html) : Champ d’application, salaires minima 2026, reprise du personnel en cas de changement de prestataire : l’essentiel de l’IDCC 2098 pour l’acheteur.
+- [Cahier des charges d’une prestation d’accueil : modèle et rubriques essentielles](https://www.nova-serenity.fr/blog/cahier-des-charges-prestation-accueil.html) : Horaires, missions, profils, sûreté, RGPD, outils, indicateurs, RSE : le modèle de cahier des charges pour consulter des sociétés d’accueil.
+- [Comment choisir sa société d’hôtesses d’accueil en entreprise à Paris : 12 critères](https://www.nova-serenity.fr/blog/choisir-societe-hotesses-accueil-paris.html) : Recrutement, CDI, remplacements, sûreté, outils, RSE, reporting : les 12 critères pour choisir une société d’accueil en entreprise à Paris et en Île-de-France.
+- [Hôtessariat en entreprise : définition, prestations et bonnes pratiques en 2026](https://www.nova-serenity.fr/blog/hotessariat-entreprise-definition-prestations.html) : Hôtessariat en entreprise : définition, différence avec l’hôtessariat événementiel, prestations et critères pour choisir une agence d’hôtesses d’accueil.
+- [Glossaire de l’accueil en entreprise et du Facility Management : 29 définitions](https://www.nova-serenity.fr/blog/glossaire-accueil-entreprise-facility-management.html) : Accueil physique, standard externalisé, registre des visiteurs, conciergerie phygitale, SLA, IDCC 2098 : 29 définitions pour les services généraux.
+- [Hôte d’accueil, agent d’accueil, standardiste, hospitality manager : quelles différences ?](https://www.nova-serenity.fr/blog/hote-accueil-agent-accueil-standardiste-differences.html) : Missions et contextes : les différences entre hôtesse d’accueil, agent d’accueil, standardiste, office manager et hospitality manager en entreprise.
+- [Prix d’une hôtesse d’accueil en entreprise en 2026 : comment se construit le tarif](https://www.nova-serenity.fr/blog/prix-hotesse-accueil-entreprise.html) : Salaire, SMIC 2026, convention IDCC 2098, remplacements, encadrement : comment se calcule le prix d’une hôtesse d’accueil en entreprise et comment comparer les devis.
+- [Pourquoi l’accueil en entreprise est devenu un enjeu stratégique en 2026](https://www.nova-serenity.fr/blog/accueil-entreprise-enjeu-strategique.html) : Image de marque, sûreté, travail hybride, expérience visiteurs : pourquoi l’accueil en entreprise est un levier stratégique en 2026, et comment le piloter.
+- [Externaliser l’accueil en entreprise : avantages et bonnes pratiques en 2026](https://www.nova-serenity.fr/blog/externaliser-accueil-entreprise.html) : Avantages, étapes, cahier des charges, questions à poser au prestataire : le guide 2026 pour réussir l’externalisation de l’accueil en entreprise.
+- [Conciergerie d’entreprise : fonctionnement, coût et mise en place en 2026](https://www.nova-serenity.fr/blog/conciergerie-entreprise-cout-fonctionnement.html) : Comment fonctionne une conciergerie d’entreprise, combien elle coûte, qui la finance et comment la mettre en place avec l’accueil : le guide 2026.
+- [Conciergerie d’entreprise : les services les plus demandés en 2026](https://www.nova-serenity.fr/blog/conciergerie-services-2026.html) : Pressing, colis, bien-être, assistance administrative : les services de conciergerie d’entreprise les plus demandés en 2026, et comment dimensionner votre offre.
+- [L’hospitality corporate : le nouveau standard des entreprises en 2026](https://www.nova-serenity.fr/blog/hospitality-corporate-nouvelle-norme.html) : Définition, rôle de l’hospitality manager, mise en place en 4 étapes : comment l’hospitality corporate transforme les sièges sociaux en lieux d’expérience en 2026.
+- [Comment améliorer l’expérience collaborateurs grâce à l’accueil et à la conciergerie en 2026](https://www.nova-serenity.fr/blog/ameliorer-experience-collaborateurs.html) : Accueil, conciergerie, réservation des espaces, vie de site, onboarding : six leviers concrets pour améliorer l’expérience collaborateurs au bureau en 2026.
+- [Accueil d’un immeuble multi-locataires : le guide pour les property managers et les foncières](https://www.nova-serenity.fr/blog/accueil-immeuble-multi-locataires-property-manager.html) : Accueil mutualisé, badges, visiteurs de plusieurs entreprises, services communs, reporting : comment organiser l’accueil d’un immeuble multi-locataires en 2026.
+- [Facility Management : un levier de performance pour les organisations en 2026](https://www.nova-serenity.fr/blog/facility-management-performance.html) : Expérience des occupants, occupation réelle des bureaux, décret tertiaire, données d’usage : comment le Facility Management soutient la performance des entreprises en 2026.
+- [Digitalisation de l’accueil et des services en entreprise : le guide 2026](https://www.nova-serenity.fr/blog/digitalisation-accueil-services-entreprise.html) : Visiteurs, salles, conciergerie, plannings, vie de site : comment digitaliser l’accueil en entreprise en 2026 sans perdre la dimension humaine. Méthode, RGPD et outils NOVA.
+- [Gestion des visiteurs en entreprise : sûreté, RGPD et registre digital en 2026](https://www.nova-serenity.fr/blog/gestion-visiteurs-rgpd-surete.html) : Registre des visiteurs, badges, Vigipirate, durées de conservation CNIL : les bonnes pratiques 2026 pour un accueil sûr et conforme au RGPD.
+- [Salles de réunion et flex office : réussir la gestion des espaces en 2026](https://www.nova-serenity.fr/blog/reservation-salles-flex-office.html) : Télétravail, flex office, salles fantômes : pourquoi la gestion des salles de réunion devient centrale en 2026 et comment l’accueil peut la piloter.
+- [RSE et achats responsables : ce que les entreprises attendent de leur prestataire d’accueil en 2026](https://www.nova-serenity.fr/blog/rse-achats-responsables-prestataire-accueil.html) : CSRD après l’Omnibus, qualité de l’emploi, CDI, inclusion : les critères RSE qui comptent en 2026 pour choisir un prestataire d’accueil et de conciergerie.
+
+## Informations légales
+- [Mentions légales](https://www.nova-serenity.fr/mentions-legales.html)
+- [Politique de confidentialité](https://www.nova-serenity.fr/politique-de-confidentialite.html)
+
+## Contact
+- Aurélie Godin, fondatrice et présidente : aurelie.godin@nova-serenity.fr, +33 6 62 31 67 82
+- [LinkedIn](https://www.linkedin.com/company/nova-serenity-group/)
+- Version détaillée pour les assistants IA : https://www.nova-serenity.fr/llms-full.txt
