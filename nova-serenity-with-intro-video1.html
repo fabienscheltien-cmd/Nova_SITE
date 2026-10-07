@@ -261,6 +261,7 @@
       },
       "sameAs": [
         "https://www.pappers.fr/entreprise/nova-accueil-et-services-994699155",
+        "https://annuaire-entreprises.data.gouv.fr/entreprise/994699155",
         "https://www.linkedin.com/company/nova-serenity-group/"
       ],
       "alternateName": [
@@ -897,6 +898,16 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
+        .hero h1 .hero-marque { display: block; }
+        .hero h1 .hero-activite {
+            display: block;
+            font-size: clamp(1rem, 1.9vw, 1.45rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.35;
+            margin-top: 0.6rem;
+        }
+
         .hero .accent {
             color: var(--accent-gold);
             font-weight: 700;
@@ -1230,7 +1241,7 @@
             margin-bottom: 1rem;
         }
 
-        .value-item h4 {
+        .value-item h3 {
             color: var(--primary-dark);
             margin-bottom: 0.5rem;
             font-size: 1.3rem;
@@ -1276,7 +1287,7 @@
             flex-shrink: 0;
         }
 
-        .pillar-content h4 {
+        .pillar-content h3 {
             color: var(--accent-gold);
             margin-bottom: 0.5rem;
         }
@@ -1879,7 +1890,7 @@ body { color: #152a47; }
   border-bottom: 3px solid var(--accent-gold);
   text-shadow: 0 0 24px rgba(201,169,97,0.45);
 }
-.value-item h4, .value-item p { padding: 0 1.6rem; }
+.value-item h3, .value-item p { padding: 0 1.6rem; }
 
 /* Cartes outils : remontent au survol */
 .tool-card { transition: translate 0.3s ease, box-shadow 0.3s ease; }
@@ -2086,7 +2097,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-gold); o
 <!-- Hero Section -->
 <section aria-labelledby="hero-title" class="hero" id="accueil">
 <div class="hero-content">
-<h1 id="hero-title">Nova <span class="accent">Serenity</span></h1>
+<h1 id="hero-title"><span class="hero-marque">Nova <span class="accent">Serenity</span></span><span class="hero-activite">Hôtesses d’accueil et conciergerie d’entreprise à Paris</span></h1>
 <p class="subtitle">Accueil · Conciergerie · Événementiel · Conseil</p>
 <p>L'humain au cœur de l'excellence.<br/>
                 Votre partenaire premium en Accueil, Hospitality, Event et Conseil.</p>
@@ -2313,22 +2324,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-gold); o
 <div class="values-grid">
 <div class="value-item">
 <div class="value-letter">N</div>
-<h4>Nouveaux horizons</h4>
+<h3>Nouveaux horizons</h3>
 <p>Être pionniers, ouvrir des voies et viser l'excellence dans nos services</p>
 </div>
 <div class="value-item">
 <div class="value-letter">O</div>
-<h4>Occupants au cœur</h4>
+<h3>Occupants au cœur</h3>
 <p>Mettre l'humain au centre : collaborateurs, clients et partenaires</p>
 </div>
 <div class="value-item">
 <div class="value-letter">V</div>
-<h4>Valeurs partagées</h4>
+<h3>Valeurs partagées</h3>
 <p>Construire des relations de confiance fondées sur la transparence et la sérénité</p>
 </div>
 <div class="value-item">
 <div class="value-letter">A</div>
-<h4>Agilité engagée</h4>
+<h3>Agilité engagée</h3>
 <p>Innover, s'adapter et accompagner les entreprises avec souplesse et réactivité</p>
 </div>
 </div>
@@ -2345,49 +2356,49 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-gold); o
 <div class="pillar-item">
 <div class="pillar-number">1</div>
 <div class="pillar-content">
-<h4>Croissance partagée</h4>
+<h3>Croissance partagée</h3>
 <p>Grandir avec nos clients, bâtir des relations solides et durables</p>
 </div>
 </div>
 <div class="pillar-item">
 <div class="pillar-number">2</div>
 <div class="pillar-content">
-<h4>Sur-mesure</h4>
+<h3>Sur-mesure</h3>
 <p>Concevoir des solutions uniques, adaptées à chaque besoin</p>
 </div>
 </div>
 <div class="pillar-item">
 <div class="pillar-number">3</div>
 <div class="pillar-content">
-<h4>Innovation</h4>
+<h3>Innovation</h3>
 <p>Explorer de nouvelles voies et apporter des idées créatives</p>
 </div>
 </div>
 <div class="pillar-item">
 <div class="pillar-number">4</div>
 <div class="pillar-content">
-<h4>Humanité</h4>
+<h3>Humanité</h3>
 <p>Mettre l'humain au cœur de chaque mission</p>
 </div>
 </div>
 <div class="pillar-item">
 <div class="pillar-number">5</div>
 <div class="pillar-content">
-<h4>Bien-être</h4>
+<h3>Bien-être</h3>
 <p>Favoriser la sérénité et l'équilibre au quotidien</p>
 </div>
 </div>
 <div class="pillar-item">
 <div class="pillar-number">6</div>
 <div class="pillar-content">
-<h4>Passion</h4>
+<h3>Passion</h3>
 <p>S'appuyer sur des équipes investies et motivées</p>
 </div>
 </div>
 <div class="pillar-item">
 <div class="pillar-number">7</div>
 <div class="pillar-content">
-<h4>Stabilité</h4>
+<h3>Stabilité</h3>
 <p>Garantir la fiabilité grâce à des équipes engagées en CDI</p>
 </div>
 </div>
