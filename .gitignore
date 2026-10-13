@@ -1,0 +1,8 @@
+# NOVA Club : fichiers créés sur le serveur ou en test local, à ne jamais versionner
+club/app/config.local.php
+club/data/*.sqlite
+club/data/mail.log
+club/data/last-mail.html
+club/data/photos/*
+!club/data/photos/.gitkeep
+club/data/videos/
