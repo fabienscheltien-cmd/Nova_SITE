@@ -1160,8 +1160,9 @@ body{background:#07111f}
       }
       if (actx && actx.state === 'suspended') actx.resume();
     } catch (e) { actx = null; gain = null; }
-    // Safari : "débloque" les deux vidéos pendant le geste (le son du néon est muet au début), puis les remet à zéro
-    cine.volume = 0;
+    // Safari : "débloque" les deux vidéos pendant le geste (le son du néon est muet au début), puis les remet à zéro.
+    // Avec Web Audio, le volume de la vidéo doit rester à 1 : le navigateur l'applique avant le fondu, et à 0 la musique serait muette.
+    cine.volume = gain ? 1 : 0;
     [cine, neon].forEach(v => {
       v.muted = false;
       const p = v.play();
