@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nova Snake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e7f0fa; --ink:#143b63; --muted:#5a7898; --brand:#2569a8; --btn:#ffffff; --pad:#d3e3f4;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#050c1a; --ink:#dce9f7; --muted:#8ea9c6; --brand:#5b9fe6; --btn:#12264a; --pad:#12264a; }
+}
+:root[data-theme="dark"]{ --bg:#050c1a; --ink:#dce9f7; --muted:#8ea9c6; --brand:#5b9fe6; --btn:#12264a; --pad:#12264a; }
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Outfit",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+header{width:min(100%,824px);padding:14px 16px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:1.5rem;font-weight:800;letter-spacing:-0.01em;color:var(--brand);display:flex;align-items:center;gap:10px;line-height:1}
+h1 .logo{height:1.35em;width:auto;display:block}
+.hint{margin:0;color:var(--muted);font-size:.9rem}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.tools button{font:600 .75rem "Outfit",system-ui,sans-serif;color:var(--brand);background:var(--btn);border:1.5px solid var(--brand);border-radius:999px;padding:5px 11px;cursor:pointer}
+.tools button:hover,.tools button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.stage{width:100%;flex:1;display:flex;flex-direction:column;align-items:center;min-height:0;padding:0 12px}
+canvas{display:block;border-radius:16px;background:#060d1f;max-width:100%;touch-action:none;box-shadow:0 10px 40px -12px rgba(8,30,70,.55)}
+.pad{display:none;grid-template-columns:repeat(3,64px);grid-template-rows:repeat(2,56px);gap:8px;padding:12px 0 8px;justify-content:center}
+.pad button{border:0;border-radius:14px;background:var(--pad);color:var(--ink);font:600 1.3rem "Outfit",system-ui,sans-serif;touch-action:none}
+.pad button:active{background:var(--brand);color:#fff}
+.pad .u{grid-column:2;grid-row:1}.pad .l{grid-column:1;grid-row:2}.pad .d{grid-column:2;grid-row:2}.pad .r{grid-column:3;grid-row:2}
+@media (pointer:coarse){.pad{display:grid}.hint{display:none}}
+footer{color:var(--muted);font-size:.8rem;padding:6px 16px 12px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1><svg class="logo" viewBox="7.5 0 604.7 202.1" role="img" aria-label="Nova"><g transform="translate(-1.5,362.139973) scale(0.1,-0.1)" fill="currentColor"><path d="M4291 3410 c-169 -167 -219 -210 -240 -210 -21 0 -62 36 -201 176 -96 97 -189 182 -207 190 -46 20 -75 6 -165 -83 -81 -80 -96 -111 -78 -157 10 -26 515 -540 588 -598 23 -19 47 -28 71 -28 33 0 55 19 354 318 176 174 325 331 333 348 23 53 4 92 -86 178 -123 117 -107 123 -369 -134z"/><path d="M3020 3062 l0 -247 273 -272 c171 -171 282 -274 299 -278 42 -11 68 3 145 78 74 72 100 118 88 159 -7 22 -782 808 -797 808 -5 0 -8 -111 -8 -248z"/><path d="M4258 2494 l-638 -635 0 -47 c0 -44 3 -49 83 -129 79 -79 85 -83 127 -83 l45 0 517 517 518 518 0 247 c0 137 -3 248 -7 248 -5 0 -295 -286 -645 -636z"/><path d="M2020 3074 c-134 -29 -278 -123 -350 -231 -248 -367 20 -852 471 -853 42 0 99 4 128 10 57 11 184 67 218 96 12 10 38 32 57 47 44 34 109 132 136 204 76 204 30 414 -124 569 -143 143 -339 201 -536 158z m240 -190 c156 -46 252 -179 253 -349 0 -68 -5 -90 -30 -146 -108 -237 -419 -290 -604 -105 -25 26 -56 68 -70 94 -21 41 -24 60 -24 157 0 101 2 114 29 165 67 130 178 198 327 199 36 1 89 -6 119 -15z"/><path d="M90 2540 l0 -530 95 0 c69 0 95 3 95 13 1 6 1 166 0 355 -1 196 3 342 8 342 5 0 19 -12 30 -27 78 -102 406 -524 463 -595 l70 -88 84 0 85 0 0 530 0 531 -97 -3 -98 -3 -5 -359 -5 -358 -75 97 c-41 53 -97 126 -125 162 -27 36 -79 102 -115 148 -36 45 -105 135 -155 199 l-90 116 -82 0 -83 0 0 -530z"/><path d="M5513 3058 c-5 -7 -16 -29 -23 -48 -7 -19 -23 -60 -36 -90 -92 -219 -196 -469 -250 -603 -35 -87 -74 -181 -87 -210 -48 -104 -53 -97 68 -97 105 0 106 0 115 26 6 15 24 60 41 100 l31 74 239 0 c131 0 239 -1 239 -2 0 -2 18 -46 39 -98 l39 -95 107 -3 c84 -2 106 0 102 10 -21 54 -80 197 -87 213 -9 19 -51 119 -210 505 -38 91 -84 201 -103 245 l-34 80 -90 3 c-64 2 -93 -1 -100 -10z m113 -305 c9 -21 47 -113 84 -205 l68 -168 -169 0 -169 0 13 33 c7 17 45 110 83 204 38 95 70 173 71 173 2 0 10 -17 19 -37z"/></g></svg><span>Snake</span></h1>
+  <p class="hint">Flèches ou ZQSD pour diriger · Espace pour jouer · P pause · M son</p>
+  <div class="tools"><button id="bPause" type="button" aria-pressed="false">Pause</button><button id="bSnd" type="button" aria-pressed="true">Son actif</button></div>
+</header>
+<div class="stage">
+  <canvas id="game" aria-label="Jeu Nova Snake"></canvas>
+  <div class="pad">
+    <button class="u" data-d="0,-1" aria-label="Haut">▲</button>
+    <button class="l" data-d="-1,0" aria-label="Gauche">◀</button>
+    <button class="d" data-d="0,1" aria-label="Bas">▼</button>
+    <button class="r" data-d="1,0" aria-label="Droite">▶</button>
+  </div>
+</div>
+<footer>Nova Serenity</footer>
+<script>
+(() => {
+const PATHS = ["M4291 3410 c-169 -167 -219 -210 -240 -210 -21 0 -62 36 -201 176 -96 97 -189 182 -207 190 -46 20 -75 6 -165 -83 -81 -80 -96 -111 -78 -157 10 -26 515 -540 588 -598 23 -19 47 -28 71 -28 33 0 55 19 354 318 176 174 325 331 333 348 23 53 4 92 -86 178 -123 117 -107 123 -369 -134z", "M3020 3062 l0 -247 273 -272 c171 -171 282 -274 299 -278 42 -11 68 3 145 78 74 72 100 118 88 159 -7 22 -782 808 -797 808 -5 0 -8 -111 -8 -248z", "M4258 2494 l-638 -635 0 -47 c0 -44 3 -49 83 -129 79 -79 85 -83 127 -83 l45 0 517 517 518 518 0 247 c0 137 -3 248 -7 248 -5 0 -295 -286 -645 -636z", "M2020 3074 c-134 -29 -278 -123 -350 -231 -248 -367 20 -852 471 -853 42 0 99 4 128 10 57 11 184 67 218 96 12 10 38 32 57 47 44 34 109 132 136 204 76 204 30 414 -124 569 -143 143 -339 201 -536 158z m240 -190 c156 -46 252 -179 253 -349 0 -68 -5 -90 -30 -146 -108 -237 -419 -290 -604 -105 -25 26 -56 68 -70 94 -21 41 -24 60 -24 157 0 101 2 114 29 165 67 130 178 198 327 199 36 1 89 -6 119 -15z", "M90 2540 l0 -530 95 0 c69 0 95 3 95 13 1 6 1 166 0 355 -1 196 3 342 8 342 5 0 19 -12 30 -27 78 -102 406 -524 463 -595 l70 -88 84 0 85 0 0 530 0 531 -97 -3 -98 -3 -5 -359 -5 -358 -75 97 c-41 53 -97 126 -125 162 -27 36 -79 102 -115 148 -36 45 -105 135 -155 199 l-90 116 -82 0 -83 0 0 -530z", "M5513 3058 c-5 -7 -16 -29 -23 -48 -7 -19 -23 -60 -36 -90 -92 -219 -196 -469 -250 -603 -35 -87 -74 -181 -87 -210 -48 -104 -53 -97 68 -97 105 0 106 0 115 26 6 15 24 60 41 100 l31 74 239 0 c131 0 239 -1 239 -2 0 -2 18 -46 39 -98 l39 -95 107 -3 c84 -2 106 0 102 10 -21 54 -80 197 -87 213 -9 19 -51 119 -210 505 -38 91 -84 201 -103 245 l-34 80 -90 3 c-64 2 -93 -1 -100 -10z m113 -305 c9 -21 47 -113 84 -205 l68 -168 -169 0 -169 0 13 33 c7 17 45 110 83 204 38 95 70 173 71 173 2 0 10 -17 19 -37z", "M4463 1400 c-65 -39 -73 -112 -19 -166 30 -30 40 -34 84 -34 62 0 108 33 118 86 18 99 -93 169 -183 114z", "M275 1341 c-76 -22 -98 -34 -151 -83 -76 -70 -103 -188 -68 -291 36 -106 146 -173 374 -226 135 -32 211 -65 230 -101 15 -27 12 -97 -5 -129 -8 -17 -34 -39 -62 -52 -67 -34 -218 -34 -279 -2 -53 28 -91 74 -100 119 l-6 35 -97 -3 -96 -3 3 -45 c7 -104 99 -218 210 -261 85 -32 205 -45 305 -32 114 15 186 45 252 105 47 43 58 60 76 120 24 80 21 132 -11 206 -48 107 -149 167 -352 207 -131 26 -189 47 -226 82 -32 30 -34 36 -29 78 9 86 59 117 189 116 116 -1 153 -18 189 -87 l25 -49 95 0 94 0 -3 35 c-7 94 -72 190 -157 233 -96 48 -286 61 -400 28z", "M4900 1195 l0 -115 -73 0 c-43 0 -78 -5 -85 -12 -12 -12 -17 -114 -6 -142 5 -13 22 -16 84 -16 l78 0 4 -222 c3 -249 10 -280 79 -346 46 -44 94 -57 229 -57 l115 0 3 78 3 77 -73 0 c-152 0 -170 32 -166 300 l3 165 118 3 118 3 -3 82 -3 82 -115 5 -115 5 -3 113 -3 112 -94 0 -95 0 0 -115z", "M1310 1093 c-113 -18 -227 -99 -288 -206 -64 -111 -70 -277 -14 -390 104 -210 350 -294 560 -191 66 32 141 104 171 162 36 70 34 72 -77 72 l-99 0 -31 -39 c-39 -49 -84 -64 -172 -59 -59 3 -75 8 -106 34 -49 40 -72 72 -80 112 l-6 32 293 0 c162 0 300 4 308 9 10 6 12 29 9 92 -2 68 -9 96 -34 149 -77 162 -252 252 -434 223z m138 -175 c57 -14 132 -84 132 -123 l0 -25 -200 0 c-178 0 -200 2 -200 16 0 28 39 82 76 104 64 40 115 48 192 28z", "M2807 1090 c-70 -18 -147 -61 -195 -110 -152 -154 -169 -388 -42 -556 148 -196 444 -217 618 -44 50 49 98 133 87 150 -4 6 -48 10 -99 10 l-94 0 -27 -36 c-15 -20 -43 -42 -61 -50 -38 -16 -141 -19 -178 -4 -45 17 -104 79 -120 125 l-15 45 297 0 c163 0 303 4 311 9 10 7 13 28 9 92 -11 210 -167 363 -380 374 -40 3 -90 0 -111 -5z m211 -196 c44 -26 82 -75 82 -106 0 -17 -16 -18 -198 -18 -109 0 -201 3 -205 6 -7 8 18 61 42 88 59 67 191 81 279 30z", "M3825 1091 c-58 -16 -103 -39 -143 -75 -22 -20 -42 -36 -45 -36 -3 0 -7 21 -9 48 l-3 47 -85 0 -85 0 0 -395 0 -395 90 0 90 0 5 235 c6 260 11 280 74 343 58 58 165 72 235 31 15 -9 37 -32 51 -52 25 -37 25 -41 30 -297 l5 -260 90 0 90 0 0 285 c0 274 -1 287 -23 342 -28 69 -84 129 -149 158 -52 23 -168 35 -218 21z", "M1935 1067 c-3 -6 -4 -185 -3 -397 l3 -385 84 -3 c46 -2 88 1 93 6 6 6 12 104 14 218 5 224 16 289 57 334 42 47 77 62 156 69 l76 6 3 74 c3 85 -1 91 -69 91 -90 0 -171 -38 -211 -98 l-18 -27 0 51 c0 27 -5 55 -12 62 -17 17 -167 16 -173 -1z", "M4442 1072 c-9 -7 -12 -93 -10 -398 l3 -389 83 -3 c53 -2 89 1 98 9 19 16 21 758 2 777 -14 14 -155 17 -176 4z", "M5396 1072 c-4 -7 119 -323 184 -472 11 -25 40 -98 65 -163 l46 -118 -16 -44 c-10 -24 -30 -56 -47 -72 -27 -26 -37 -28 -126 -33 l-97 -5 0 -75 0 -75 104 -3 c129 -3 191 13 252 67 25 21 57 61 72 89 45 83 367 896 359 904 -5 5 -51 7 -102 6 l-94 -3 -100 -263 c-55 -145 -102 -258 -105 -250 -2 7 -37 99 -78 203 -41 105 -84 215 -96 245 -11 30 -25 58 -31 62 -15 10 -184 10 -190 0z"];
+const P2D = PATHS.map(d => new Path2D(d));
+const LOGO = {NOVA:{idx:[0,1,2,3,4,5], box:[7.5,0,612.2,202.1]}, V:{idx:[0,1,2], box:[300.5,0,489.5,202.1]}, SER:{idx:[6,7,8,9,10,11,12,13,14], box:[0,220.2,617.7,361]}};
+const W = 800, H = 600, TOP = 56, CELL = 25, COLS = 32, ROWS = Math.floor((H - TOP) / CELL); // 21 rows
+const OY = TOP + (H - TOP - ROWS*CELL) / 2;
+const canvas = document.getElementById('game'), ctx = canvas.getContext('2d');
+let K = 1, SPR = {};
+const COL = {ink:'#e6f0fb', muted:'#8ea9c6', logo:'#4d94de', glow:'#8cc6ff', good:'#6fe3b0', star:'#ffd66b', bonus:'#7fe7ff'};
+
+function offscreen(w, h, pad){ const c = document.createElement('canvas'); c.width = Math.ceil((w+pad*2)*K); c.height = Math.ceil((h+pad*2)*K); const x = c.getContext('2d'); x.scale(K,K); x.translate(pad+w/2, pad+h/2); return {c,x,w,h,pad}; }
+function logoSprite(key, h, fill, glow, grad=true){
+  const g = LOGO[key]; const [x0,y0,x1,y1] = g.box; const s = h/(y1-y0), w = (x1-x0)*s;
+  const o = offscreen(w, h, 12); const x = o.x;
+  x.translate(-w/2,-h/2); x.scale(s,s); x.translate(-x0,-y0); x.transform(0.1,0,0,-0.1,-1.5,362.139973);
+  if (glow){ x.shadowColor = glow; x.shadowBlur = 14*K; }
+  if (grad){ const grd = x.createLinearGradient(0,3600,0,1500); grd.addColorStop(0,'#9fd0ff'); grd.addColorStop(1,fill); x.fillStyle = grd; } else x.fillStyle = fill;
+  g.idx.forEach(i => x.fill(P2D[i])); return o;
+}
+function buildSprites(){ SPR = {head:logoSprite('V', 17, '#ffffff', null, false), title:logoSprite('NOVA', 70, COL.logo, COL.glow), ser:logoSprite('SER', 12, '#ffffff', null, false)}; }
+function drawSpr(o, cx, cy, rot=0, sc=1, alpha=1){ ctx.save(); ctx.globalAlpha = alpha; ctx.translate(cx,cy); if (rot) ctx.rotate(rot); if (sc !== 1) ctx.scale(sc,sc); const tw = o.w+o.pad*2, th = o.h+o.pad*2; ctx.drawImage(o.c,-tw/2,-th/2,tw,th); ctx.restore(); }
+
+const pad = document.querySelector('.pad');
+/* ===== Socle commun Nova (identique dans les cinq jeux) ===== */
+// Difficulté : d = 0 au niveau 1, puis croît sans jamais plafonner (≈ 0,25 niv. 3 · 0,45 niv. 6 · 0,62 niv. 11 · 0,83 niv. 26).
+// Chaque jeu règle ses paramètres en un seul endroit (PARAMS) : valeur « facile » à d = 0, valeur « dure » quand d tend vers 1.
+const diff = L => (L - 1) / (L + 5);
+const lerp = (a, b, t) => a + (b - a) * t;
+const rankName = L => L < 3 ? 'Découverte' : L < 6 ? 'Confirmé' : L < 10 ? 'Expert' : 'Nova';
+function isTouch(){ return matchMedia('(pointer:coarse)').matches; }
+function veil(){ ctx.fillStyle = 'rgba(5,11,26,.72)'; ctx.fillRect(0,0,W,H); }
+function jingle(){ beep(523,0.12,'triangle',0.07); beep(784,0.18,'triangle',0.07,0,0.12); beep(1046,0.22,'triangle',0.06,0,0.24); }
+function togglePause(){ if (state === 'play') state = 'pause'; else if (state === 'pause') state = 'play'; }
+// Bandeau supérieur : score · record · vies | niveau · palier · statut du jeu · progression vers le niveau suivant
+function drawHUD({score, best, level, progress = 0, lives = 0, maxLives = 0, drawLife = null, status = null, playing = true}){
+  ctx.fillStyle = 'rgba(5,11,26,.88)'; ctx.fillRect(0,0,W,58);
+  ctx.fillStyle = 'rgba(255,255,255,.04)'; ctx.fillRect(0,0,W,58);
+  ctx.fillStyle = 'rgba(140,198,255,.25)'; ctx.fillRect(0,57,W,1);
+  text('Score', 22, 22, 13, COL.muted, 400, 'left'); text(String(score).padStart(6,'0'), 64, 22, 18, COL.ink, 800, 'left');
+  text('Record ' + String(best).padStart(6,'0'), W/2, 22, 13, COL.muted, 400);
+  if (!playing) return;
+  if (drawLife) for (let i = 0; i < maxLives; i++) drawLife(W - 40 - (maxLives - 1 - i) * 44, 22, i < lives);
+  text('Niveau ' + level, 22, 44, 14, COL.ink, 800, 'left');
+  const lw = ctx.measureText('Niveau ' + level).width;
+  text(rankName(level), 30 + lw, 44, 12, '#ffd66b', 600, 'left');
+  if (status) status(44);
+  text('Prochain niveau', W - 150, 45, 11, COL.muted, 400, 'right');
+  ctx.fillStyle = 'rgba(255,255,255,.12)'; ctx.fillRect(W - 142, 42, 120, 5);
+  ctx.fillStyle = '#ffd66b'; ctx.fillRect(W - 142, 42, 120 * Math.max(0, Math.min(1, progress)), 5);
+}
+function outlined(t, x, y, size, color, weight){
+  ctx.font = `${weight} ${size}px Outfit, system-ui, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.lineJoin = 'round'; ctx.lineWidth = 6; ctx.strokeStyle = 'rgba(5,11,26,.85)'; ctx.strokeText(t, x, y);
+  ctx.fillStyle = color; ctx.fillText(t, x, y);
+}
+function drawLevelBanner(level, msg, t, y = H/2 - 10){
+  ctx.globalAlpha = Math.min(1, t * 2);
+  outlined('Niveau ' + level, W/2, y, 50, COL.ink, 800);
+  outlined(rankName(level) + ' · ' + msg, W/2, y + 44, 18, '#8cc6ff', 600);
+  ctx.globalAlpha = 1;
+}
+function drawPause(){
+  veil(); text('Pause', W/2, H/2 - 10, 48, COL.ink, 800);
+  text(isTouch() ? 'Touchez l’écran pour reprendre' : 'Appuyez sur P pour reprendre', W/2, H/2 + 34, 17, COL.muted, 400);
+}
+function drawGameOver(stats, record, replayTouch = 'Touchez pour rejouer'){
+  veil(); text('Partie terminée', W/2, H/2 - 50, 48, COL.ink, 800);
+  text(stats, W/2, H/2, 20, '#8cc6ff', 600);
+  if (record) text('Nouveau record', W/2, H/2 + 30, 17, COL.good, 600);
+  text(isTouch() ? replayTouch : 'Espace pour rejouer', W/2, H/2 + 70, 17, COL.muted, 400);
+}
+/* ===== fin du socle commun ===== */
+
+function resize(){
+  const padH = getComputedStyle(pad).display === 'none' ? 0 : pad.offsetHeight;
+  const headH = document.querySelector('header').offsetHeight + document.querySelector('footer').offsetHeight;
+  const availW = Math.min(document.querySelector('.stage').clientWidth - 24, 800);
+  const availH = window.innerHeight - headH - padH - 20;
+  const scale = Math.max(0.3, Math.min(availW/W, availH/H));
+  const cssW = Math.floor(W*scale), cssH = Math.floor(H*scale);
+  canvas.style.width = cssW+'px'; canvas.style.height = cssH+'px';
+  const dpr = Math.min(window.devicePixelRatio||1, 3);
+  canvas.width = Math.round(cssW*dpr); canvas.height = Math.round(cssH*dpr);
+  K = canvas.width / W; buildSprites();
+}
+
+let best = 0; try { best = parseInt(localStorage.getItem('nova-snake-best')||'0',10)||0; } catch(e){}
+function saveBest(){ try { localStorage.setItem('nova-snake-best', String(best)); } catch(e){} }
+let AC = null, muted = false;
+function beep(f, d, type='triangle', v=0.05, slide=0, delay=0){
+  if (muted) return;
+  try{ if (!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+    const t = AC.currentTime + delay, o = AC.createOscillator(), g = AC.createGain();
+    o.type = type; o.frequency.setValueAtTime(f,t); if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30,f+slide), t+d);
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    o.connect(g).connect(AC.destination); o.start(t); o.stop(t+d+0.02);
+  }catch(e){}
+}
+
+/* ---------- réglages de difficulté (un seul endroit) ---------- */
+const PARAMS = L => { const d = diff(L); return {
+  step:   lerp(0.16, 0.045, d),                    // secondes par case : plus petit = serpent plus rapide
+  perLvl: 5 + Math.min(3, Math.floor((L - 1) / 4)), // étoiles par niveau (un peu plus quand ça va vite)
+  rocks:  L < 3 ? 0 : Math.min(12, L - 2),         // astéroïdes cumulés à partir du niveau 3
+  bonusP: lerp(0.30, 0.18, d),                     // chance d'un bonus Serenity après une étoile
+  bonusT: lerp(7, 4.5, d),                         // durée du bonus avant disparition
+}; };
+
+const bSnd = document.getElementById('bSnd'), bPause = document.getElementById('bPause');
+bSnd.onclick = () => { muted = !muted; bSnd.blur(); };
+bPause.onclick = () => { togglePause(); bPause.blur(); };
+let toolSig = '';
+function pollTools(){
+  const s = state + '|' + muted; if (s === toolSig) return; toolSig = s;
+  bSnd.setAttribute('aria-pressed', String(!muted)); bSnd.textContent = muted ? 'Son coupé' : 'Son actif';
+  bPause.setAttribute('aria-pressed', String(state === 'pause')); bPause.textContent = state === 'pause' ? 'Reprendre' : 'Pause';
+}
+
+/* ---------- state ---------- */
+let P = PARAMS(1), levelFood = 0, rocks = [], bannerMsg = '';
+let state = 'menu', score = 0, level = 1, eaten = 0, snake = [], prev = [], dir = {x:1,y:0}, queue = [], acc = 0, grow = 0;
+let food = null, bonus = null, parts = [], pops = [], bannerT = 0, deadT = 0, flash = 0;
+const stars = Array.from({length:90}, () => ({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.3+0.4, tw:Math.random()*6}));
+const interval = () => P.step;
+
+function newGame(){
+  score = 0; level = 1; eaten = 0; levelFood = 0; rocks = []; P = PARAMS(1); bannerMsg = 'Mangez les étoiles, évitez les bords';
+  dir = {x:1,y:0}; queue = []; acc = 0; grow = 0; parts = []; pops = []; bonus = null;
+  const cy = Math.floor(ROWS/2);
+  snake = [{x:8,y:cy},{x:7,y:cy},{x:6,y:cy},{x:5,y:cy}]; prev = snake.map(s => ({...s}));
+  placeFood(); state = 'play'; bannerT = 1.8;
+  beep(520,0.12,'triangle',0.06,300);
+}
+function free(x,y){ return !snake.some(s => s.x===x && s.y===y) && !rocks.some(r => r.x===x && r.y===y) && !(food && food.x===x && food.y===y) && !(bonus && bonus.x===x && bonus.y===y); }
+function randomCell(){ for (let i=0;i<500;i++){ const x = Math.floor(Math.random()*COLS), y = Math.floor(Math.random()*ROWS); if (free(x,y)) return {x,y}; } return null; }
+function placeFood(){ food = null; food = randomCell(); }
+// Astéroïdes isolés (jamais collés entre eux ni au bord) : toute case reste atteignable, et aucun n'apparaît près de la tête.
+function addRock(){
+  const head = snake[0];
+  for (let i = 0; i < 300; i++){
+    const x = 1 + Math.floor(Math.random() * (COLS - 2)), y = 1 + Math.floor(Math.random() * (ROWS - 2));
+    if (!free(x,y) || Math.abs(x - head.x) + Math.abs(y - head.y) < 7) continue;
+    if (rocks.some(r => Math.abs(r.x - x) <= 1 && Math.abs(r.y - y) <= 1)) continue;
+    rocks.push({x, y, age:0}); return true;
+  }
+  return false;
+}
+function levelUp(){
+  levelFood = 0; level++; P = PARAMS(level); bannerT = 1.8; flash = 0.4; jingle();
+  const before = rocks.length; while (rocks.length < P.rocks && addRock());
+  bannerMsg = rocks.length > before ? (before === 0 ? 'Premier astéroïde, ça accélère' : 'Un astéroïde de plus, ça accélère') : 'Ça accélère';
+}
+function cx(x){ return x*CELL + CELL/2; } function cy(y){ return OY + y*CELL + CELL/2; }
+function burst(x,y,color,n=16,sp=150){ for (let i=0;i<n;i++){ const a = Math.random()*Math.PI*2, v = Math.random()*sp+20; parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:0.4+Math.random()*0.4,max:0.8,color,s:Math.random()*3+1}); } }
+
+function turn(dx, dy){
+  if (state === 'menu' || state === 'over'){ newGame(); return; }
+  if (state === 'pause'){ state = 'play'; }
+  const last = queue.length ? queue[queue.length-1] : dir;
+  if ((dx === -last.x && dy === -last.y) || (dx === last.x && dy === last.y)) return;
+  if (queue.length < 3) queue.push({x:dx, y:dy});
+}
+
+function step(){
+  prev = snake.map(s => ({...s}));
+  if (queue.length) dir = queue.shift();
+  const head = {x:snake[0].x + dir.x, y:snake[0].y + dir.y};
+  const willGrow = grow > 0;
+  const body = willGrow ? snake : snake.slice(0, -1);
+  if (head.x < 0 || head.y < 0 || head.x >= COLS || head.y >= ROWS || body.some(s => s.x===head.x && s.y===head.y) || rocks.some(r => r.x===head.x && r.y===head.y)){ die(); return; }
+  snake.unshift(head);
+  if (willGrow){ grow--; prev.push({...prev[prev.length-1]}); } else snake.pop();
+  // eat
+  if (food && head.x === food.x && head.y === food.y){
+    const pts = 10 * level; score += pts; eaten++; levelFood++; grow += 1;
+    burst(cx(food.x), cy(food.y), COL.star, 18); pops.push({x:cx(food.x), y:cy(food.y)-14, t:'+'+pts, c:COL.star, life:1});
+    beep(660 + Math.min(levelFood, 8)*80, 0.09, 'triangle', 0.06);
+    placeFood();
+    if (levelFood >= P.perLvl) levelUp();
+    if (!bonus && Math.random() < P.bonusP){ const c = randomCell(); if (c) bonus = {...c, t:P.bonusT, max:P.bonusT}; }
+  }
+  if (bonus && head.x === bonus.x && head.y === bonus.y){
+    const pts = 50 * level; score += pts; grow += 2;
+    burst(cx(bonus.x), cy(bonus.y), COL.bonus, 30, 200); pops.push({x:cx(bonus.x), y:cy(bonus.y)-14, t:'Serenity +'+pts, c:COL.bonus, life:1.2});
+    beep(990,0.1,'sine',0.07); beep(1480,0.16,'sine',0.06,0,0.08);
+    bonus = null;
+  }
+  if (score > best) best = score;
+}
+function die(){
+  state = 'dying'; deadT = 1.1; flash = 0.6;
+  snake.forEach((s,i) => setTimeout(() => burst(cx(s.x), cy(s.y), i === 0 ? '#ffffff' : COL.logo, 6, 110), i*18));
+  beep(200,0.5,'sawtooth',0.06,-140);
+  saveBest();
+}
+
+/* ---------- input ---------- */
+window.addEventListener('keydown', e => {
+  const k = e.key;
+  const map = {ArrowUp:[0,-1], z:[0,-1], Z:[0,-1], w:[0,-1], W:[0,-1], ArrowDown:[0,1], s:[0,1], S:[0,1], ArrowLeft:[-1,0], q:[-1,0], Q:[-1,0], a:[-1,0], A:[-1,0], ArrowRight:[1,0], d:[1,0], D:[1,0]};
+  if (k in map){ e.preventDefault(); turn(...map[k]); }
+  if (k === ' ' || k === 'Enter'){ e.preventDefault(); if (state === 'menu' || state === 'over') newGame(); else if (state === 'pause') state = 'play'; }
+  if (k === 'p' || k === 'P' || k === 'Escape'){ if (state === 'play') state = 'pause'; else if (state === 'pause') state = 'play'; }
+  if (k === 'm' || k === 'M') muted = !muted;
+});
+pad.querySelectorAll('button').forEach(b => b.addEventListener('pointerdown', e => { e.preventDefault(); const [x,y] = b.dataset.d.split(',').map(Number); turn(x,y); }));
+let sw = null;
+canvas.addEventListener('pointerdown', e => { sw = {x:e.clientX, y:e.clientY}; if (state === 'menu' || state === 'over') newGame(); else if (state === 'pause') state = 'play'; });
+canvas.addEventListener('pointermove', e => {
+  if (!sw) return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
+  if (Math.hypot(dx,dy) > 24){ if (Math.abs(dx) > Math.abs(dy)) turn(Math.sign(dx),0); else turn(0,Math.sign(dy)); sw = {x:e.clientX, y:e.clientY}; }
+});
+['pointerup','pointercancel','pointerleave'].forEach(t => canvas.addEventListener(t, () => sw = null));
+window.addEventListener('blur', () => { if (state === 'play') state = 'pause'; });
+
+/* ---------- loop ---------- */
+function update(dt){
+  for (const s of stars) s.tw += dt*2;
+  for (const r of rocks) r.age += dt;
+  for (const p of parts){ p.x += p.vx*dt; p.y += p.vy*dt; p.vx *= 0.94; p.vy *= 0.94; p.life -= dt; } parts = parts.filter(p => p.life > 0);
+  for (const p of pops){ p.y -= 28*dt; p.life -= dt*0.9; } pops = pops.filter(p => p.life > 0);
+  bannerT = Math.max(0, bannerT - dt); flash = Math.max(0, flash - dt);
+  if (state === 'dying'){ deadT -= dt; if (deadT <= 0) state = 'over'; return; }
+  if (state !== 'play') return;
+  if (bonus){ bonus.t -= dt; if (bonus.t <= 0) bonus = null; }
+  acc += dt;
+  const iv = interval();
+  while (acc >= iv && state === 'play'){ acc -= iv; step(); }
+}
+
+function text(t,x,y,size,color,weight=600,align='center'){ ctx.font = `${weight} ${size}px Outfit, system-ui, sans-serif`; ctx.fillStyle = color; ctx.textAlign = align; ctx.textBaseline = 'middle'; ctx.fillText(t,x,y); }
+function star(x,y,r){ ctx.beginPath(); for (let i=0;i<10;i++){ const a = -Math.PI/2 + i*Math.PI/5, rr = i%2 ? r*0.45 : r; ctx.lineTo(x+Math.cos(a)*rr, y+Math.sin(a)*rr); } ctx.closePath(); ctx.fill(); }
+function mix(a, b, t){ return `rgb(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)})`; }
+const C_HEAD = [140,198,255], C_TAIL = [37,105,168];
+
+function drawRock(x, y, sc = 1){
+  ctx.save(); ctx.translate(x, y); ctx.scale(sc, sc);
+  ctx.shadowColor = 'rgba(255,107,139,.55)'; ctx.shadowBlur = 12;
+  ctx.beginPath(); for (let i = 0; i < 8; i++){ const a = i * Math.PI / 4 + 0.2, r = CELL * (i % 2 ? 0.34 : 0.44); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); } ctx.closePath();
+  ctx.fillStyle = '#2a3560'; ctx.fill(); ctx.shadowBlur = 0; ctx.strokeStyle = '#ff6b8b'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,.18)'; ctx.fillRect(-4, -6, 5, 3);
+  ctx.restore();
+}
+function drawSnake(alpha){
+  const t = state === 'play' ? Math.min(1, acc / interval()) : 1;
+  const pts = snake.map((s,i) => { const p = prev[i] || s; return {x: cx(p.x + (s.x - p.x)*t), y: cy(p.y + (s.y - p.y)*t)}; });
+  const n = pts.length;
+  ctx.save(); ctx.globalAlpha = alpha;
+  // glow
+  ctx.shadowColor = 'rgba(140,198,255,.5)'; ctx.shadowBlur = 16;
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  for (let i=n-1;i>0;i--){
+    const f = i/(n-1), w = CELL*0.78 - f*CELL*0.28;
+    ctx.strokeStyle = mix(C_HEAD, C_TAIL, f); ctx.lineWidth = w;
+    ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[i-1].x, pts[i-1].y); ctx.stroke();
+  }
+  ctx.shadowBlur = 0;
+  // stripes
+  for (let i=2;i<n;i+=3){ const f = i/(n-1); ctx.fillStyle = `rgba(255,255,255,${0.22 - f*0.15})`; ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 3 - f*1.5, 0, Math.PI*2); ctx.fill(); }
+  // head
+  const h = pts[0], a = Math.atan2(dir.y, dir.x);
+  const hg = ctx.createRadialGradient(h.x-4, h.y-4, 2, h.x, h.y, CELL*0.62);
+  hg.addColorStop(0, '#6fb0f0'); hg.addColorStop(1, '#1f5b95');
+  ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(h.x, h.y, CELL*0.58, 0, Math.PI*2); ctx.fill();
+  ctx.strokeStyle = '#bfe0ff'; ctx.lineWidth = 1.5; ctx.stroke();
+  drawSpr(SPR.head, h.x, h.y, a - Math.PI/2);
+  ctx.restore();
+}
+function draw(){
+  ctx.setTransform(K,0,0,K,0,0);
+  const g = ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#050b1a'); g.addColorStop(1,'#0c1f40');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  for (const s of stars){ ctx.globalAlpha = 0.25 + 0.25*Math.sin(s.tw); ctx.fillStyle = '#cfe2f8'; ctx.fillRect(s.x,s.y,s.r,s.r); } ctx.globalAlpha = 1;
+  // board
+  ctx.fillStyle = 'rgba(140,198,255,.05)'; ctx.fillRect(0, OY, COLS*CELL, ROWS*CELL);
+  ctx.fillStyle = 'rgba(140,198,255,.12)';
+  for (let x=0;x<=COLS;x++) for (let y=0;y<=ROWS;y++) ctx.fillRect(x*CELL-0.75, OY + y*CELL-0.75, 1.5, 1.5);
+  ctx.strokeStyle = 'rgba(140,198,255,.45)'; ctx.lineWidth = 2; ctx.strokeRect(1, OY, COLS*CELL-2, ROWS*CELL);
+
+  // HUD
+  drawHUD({score, best, level, progress: levelFood / P.perLvl, playing: state !== 'menu'});
+
+  if (state === 'menu'){ drawMenu(); return; }
+
+  for (const r of rocks) drawRock(cx(r.x), cy(r.y), Math.min(1, r.age / 0.3));
+  // food
+  const now = performance.now()/1000;
+  if (food){
+    const x = cx(food.x), y = cy(food.y), p = 1 + Math.sin(now*6)*0.08;
+    const rg = ctx.createRadialGradient(x,y,1,x,y,CELL); rg.addColorStop(0,'rgba(255,214,107,.55)'); rg.addColorStop(1,'rgba(255,214,107,0)');
+    ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(x,y,CELL,0,Math.PI*2); ctx.fill();
+    ctx.save(); ctx.translate(x,y); ctx.rotate(now*1.2); ctx.fillStyle = COL.star; star(0,0,9*p); ctx.restore();
+  }
+  if (bonus){
+    const x = cx(bonus.x), y = cy(bonus.y), blink = bonus.t < 2 && Math.floor(bonus.t*6)%2 === 0;
+    if (!blink){
+      const rg = ctx.createRadialGradient(x,y,1,x,y,CELL*1.3); rg.addColorStop(0,'rgba(127,231,255,.6)'); rg.addColorStop(1,'rgba(127,231,255,0)');
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(x,y,CELL*1.3,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#1b6f8f'; ctx.beginPath(); ctx.arc(x,y,11 + Math.sin(now*8),0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle = COL.bonus; ctx.lineWidth = 2; ctx.stroke();
+      drawSpr(SPR.ser, x, y, 0, 0.7);
+    }
+    ctx.strokeStyle = 'rgba(127,231,255,.7)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, 15, -Math.PI/2, -Math.PI/2 + Math.PI*2*(bonus.t/bonus.max)); ctx.stroke();
+  }
+
+  drawSnake(state === 'dying' || state === 'over' ? Math.max(0.15, deadT) : 1);
+
+  for (const p of parts){ ctx.globalAlpha = Math.max(0,p.life/p.max); ctx.fillStyle = p.color; ctx.fillRect(p.x-p.s/2,p.y-p.s/2,p.s,p.s); } ctx.globalAlpha = 1;
+  for (const p of pops){ ctx.globalAlpha = Math.max(0,Math.min(1,p.life*1.5)); text(p.t, p.x, p.y, 17, p.c, 800); } ctx.globalAlpha = 1;
+  if (flash > 0){ ctx.fillStyle = `rgba(140,198,255,${flash*0.25})`; ctx.fillRect(0,OY,W,ROWS*CELL); }
+
+  if (bannerT > 0 && state === 'play') drawLevelBanner(level, bannerMsg, bannerT);
+  if (state === 'pause') drawPause();
+  if (state === 'over') drawGameOver('Score ' + score + ' · niveau ' + level + ' · longueur ' + snake.length, score >= best && score > 0);
+}
+function drawMenu(){
+  const t = performance.now()/1000;
+  drawSpr(SPR.title, W/2, 140 + Math.sin(t*2)*4);
+  text('Nova Snake', W/2, 222, 46, COL.ink, 800);
+  text('Guidez le serpent NOVA, mangez les étoiles et grandissez.', W/2, 258, 16, COL.muted, 400);
+  // demo snake
+  ctx.lineCap = 'round';
+  for (let i=10;i>0;i--){ const f = i/10; ctx.strokeStyle = mix(C_HEAD, C_TAIL, f); ctx.lineWidth = 19 - f*7;
+    const x1 = W/2 - 110 + i*18, x0 = W/2 - 110 + (i-1)*18, y = (xx) => 318 + Math.sin(xx/30 + t*3)*8;
+    ctx.beginPath(); ctx.moveTo(x1, y(x1)); ctx.lineTo(x0, y(x0)); ctx.stroke(); }
+  const hx = W/2 - 110, hy = 318 + Math.sin(hx/30 + t*3)*8;
+  ctx.fillStyle = '#2f73b8'; ctx.beginPath(); ctx.arc(hx, hy, 14, 0, Math.PI*2); ctx.fill(); drawSpr(SPR.head, hx, hy, Math.PI/2);
+  ctx.fillStyle = COL.star; ctx.save(); ctx.translate(W/2 - 170, 318); ctx.rotate(t); star(0,0,9); ctx.restore();
+  ctx.fillStyle = COL.star; star(W/2 - 150, 380, 9); text('Étoile : 10 points × niveau', W/2 - 128, 380, 16, COL.ink, 600, 'left');
+  ctx.fillStyle = '#1b6f8f'; ctx.beginPath(); ctx.arc(W/2 - 150, 416, 11, 0, Math.PI*2); ctx.fill(); ctx.strokeStyle = COL.bonus; ctx.lineWidth = 2; ctx.stroke(); drawSpr(SPR.ser, W/2 - 150, 416, 0, 0.7);
+  text('Bonus Serenity : 50 points × niveau, à attraper vite', W/2 - 128, 416, 16, COL.ink, 600, 'left');
+  drawRock(W/2 - 150, 452, 1); text('Astéroïde : à éviter, dès le niveau 3', W/2 - 128, 452, 16, COL.ink, 600, 'left');
+  text('Difficulté progressive : le serpent accélère à chaque niveau.', W/2, 492, 15, '#ffd66b', 600);
+  ctx.globalAlpha = 0.55 + 0.45*Math.abs(Math.sin(t*2.2));
+  text(isTouch() ? 'Touchez pour jouer' : 'Appuyez sur Espace pour jouer', W/2, 530, 20, '#8cc6ff', 600);
+  ctx.globalAlpha = 1;
+}
+
+let last = performance.now();
+function frame(now){ const dt = Math.min(0.05, (now-last)/1000); last = now; update(dt); draw(); pollTools(); requestAnimationFrame(frame); }
+window.addEventListener('resize', resize);
+resize(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

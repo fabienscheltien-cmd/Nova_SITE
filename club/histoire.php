@@ -7,7 +7,8 @@ if (!current_member()) redirect(base_url());
 seed_story();
 
 $items = q('SELECT s.*, p.width, p.height FROM club_story s JOIN club_photos p ON p.id = s.photo_id
-            ORDER BY (s.story_date IS NULL) ASC, s.story_date ASC, s.id ASC')->fetchAll();
+            ORDER BY (s.story_date IS NULL) DESC, s.story_date DESC, s.id DESC')->fetchAll();
+$total = count($items);
 function paras(?string $t): string {
     $o = ''; foreach (preg_split('/\R{2,}/', trim((string)$t)) as $p) if (trim($p) !== '') $o .= '<p>' . nl2br(h(trim($p))) . '</p>';
     return $o;
@@ -25,6 +26,7 @@ club_header('histoire');
   <?php if (!$items): ?>
     <div class="c-section"><p class="c-empty">Les archives du lancement sont en cours d'accrochage.</p></div>
   <?php else: ?>
+  <p class="c-story-end c-story-next">À suivre…</p>
   <ol class="c-timeline" data-lightbox>
     <?php foreach ($items as $n => $it): ?>
     <li class="c-tl-item">
@@ -40,7 +42,7 @@ club_header('histoire');
       </a>
       <?php endif; ?>
       <div class="c-tl-txt">
-        <p class="c-ch-num">Chapitre <?= roman($n + 1) ?><?php if ($it['story_date']): ?><span> · <?= h(ucfirst(fr_month_year($it['story_date']))) ?></span><?php endif; ?></p>
+        <p class="c-ch-num">Chapitre <?= roman($total - $n) ?><?php if ($it['story_date']): ?><span> · <?= h(ucfirst(fr_month_year($it['story_date']))) ?></span><?php endif; ?></p>
         <h2><?= h($it['title']) ?></h2>
         <?php if (trim((string)$it['quote']) !== ''): ?><blockquote class="c-quote">« <?= h(trim($it['quote'])) ?> »</blockquote><?php endif; ?>
         <?= paras($it['caption']) ?>
@@ -48,8 +50,7 @@ club_header('histoire');
     </li>
     <?php endforeach; ?>
   </ol>
-  <p class="c-story-end">À suivre…</p>
-  <script src="<?= h(base_url('assets/lightbox.js')) ?>"></script>
+    <script src="<?= h(base_url('assets/lightbox.js')) ?>"></script>
   <?php endif; ?>
 </main>
 <?php page_end();

@@ -218,3 +218,4 @@ img{max-width:100%;display:block}
 .c-tl-video{background:#000}
 .c-tl-video video{display:block;width:100%;max-height:640px;background:#000}
 .c-story-end{text-align:center;font-family:var(--serif);font-style:italic;font-size:1.4rem;color:var(--miel-clair);padding:0 1rem 5rem;margin-top:-2rem}
+.c-story-next{padding:2.6rem 1rem 0;margin:0}

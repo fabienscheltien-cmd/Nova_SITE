@@ -1,17 +1,11 @@
 [
  {
   "image": "ch1.png",
-  "date": "2025-12-01",
+  "date": "2025-11-26",
   "title": "Le silence, puis la parole",
   "quote": "5 mois d'ombre et de silence. La page est tournée. Maintenant, je parle.",
-  "text": "Avant NOVA Serenity, il y a eu cinq mois de silence. Le temps de tourner une page, de rassembler vingt ans d'expérience de l'accueil en entreprise et de dessiner une maison nouvelle.\n\nPuis quelques mots ont suffi à faire naître l'attente : « Êtes-vous prêts ? Dans deux jours… tout sera révélé. »"
- },
- {
-  "image": "ch2.png",
-  "date": "2025-12-15",
-  "title": "Une première table, pour une belle cause",
-  "quote": "Merci à ma table pour ce moment mémorable… et pour votre fair-play face à mes bluffs approximatifs.",
-  "text": "Nos premiers pas dans l'écosystème immobilier, nous les avons faits autour d'une table de poker. La soirée Noël & Poker des Immocuriens réunissait les acteurs de l'immobilier dans un bel élan de générosité, au bénéfice des enfants hospitalisés.\n\nSolidarité, convivialité, engagement collectif : tout ce qui nous anime était réuni ce soir-là. Merci à Cyril Dugue, président de l'association Les Immocuriens, et à tout son Bureau."
+  "text": "Avant NOVA Serenity, il y a eu cinq mois de silence. Le temps de tourner une page, de rassembler vingt ans d'expérience de l'accueil en entreprise et de dessiner une maison nouvelle.\n\nPuis quelques mots ont suffi à faire naître l'attente : « Êtes-vous prêts ? Dans deux jours… tout sera révélé. »",
+  "video": "ch1.mp4"
  },
  {
   "image": "ch3.png",

@@ -5,6 +5,7 @@ require __DIR__ . '/app/layout.php';
 header('Cache-Control: no-store');
 $me = current_member();
 if (!$me) redirect(base_url());
+seed_events();
 
 $today = date('Y-m-d');
 $upcoming = q('SELECT * FROM club_events WHERE event_date >= ? ORDER BY event_date ASC, id ASC', [$today])->fetchAll();
@@ -64,7 +65,7 @@ club_header();
           <?php else: ?><span class="c-noimg"><img src="<?= h(base_url('assets/nova-mark-or.png')) ?>" alt=""></span><?php endif; ?>
         </figure>
         <h3><?= h($e['title']) ?></h3>
-        <p class="c-meta"><?= h(fr_date($e['event_date'])) ?><?= $e['place'] ? ' · ' . h($e['place']) : '' ?></p>
+        <p class="c-meta"><?= h(event_date_label($e, false)) ?><?= $e['place'] ? ' · ' . h($e['place']) : '' ?></p>
         <?php if ((int)$e['nb']): ?><p class="c-count"><?= (int)$e['nb'] ?> photo<?= (int)$e['nb'] > 1 ? 's' : '' ?></p><?php endif; ?>
       </a>
       <?php endforeach; ?>

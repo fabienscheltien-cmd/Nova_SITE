@@ -52,7 +52,7 @@ function install_schema(PDO $pdo) {
         "CREATE TABLE IF NOT EXISTS club_sessions (id $id, member_id INT NOT NULL, token_hash CHAR(64) NOT NULL, created_at DATETIME NOT NULL,
             expires_at DATETIME NOT NULL)$end",
         "CREATE TABLE IF NOT EXISTS club_events (id $id, title VARCHAR(200) NOT NULL, event_date DATE NOT NULL, event_time VARCHAR(60) NULL,
-            place VARCHAR(200) NULL, description TEXT NULL, cover_photo_id INT NULL, created_at DATETIME NOT NULL)$end",
+            place VARCHAR(200) NULL, description TEXT NULL, cover_photo_id INT NULL, created_at DATETIME NOT NULL, month_only INT NOT NULL DEFAULT 0)$end",
         "CREATE TABLE IF NOT EXISTS club_photos (id $id, event_id INT NOT NULL, file VARCHAR(80) NOT NULL, width INT NOT NULL, height INT NOT NULL,
             created_at DATETIME NOT NULL)$end",
         "CREATE TABLE IF NOT EXISTS club_attempts (id $id, ip_hash CHAR(64) NOT NULL, action VARCHAR(20) NOT NULL, created_at DATETIME NOT NULL)$end",
@@ -62,10 +62,11 @@ function install_schema(PDO $pdo) {
     static $done = false;
     if ($done) return;
     $done = true;
-    try { $pdo->query('SELECT quote, video FROM club_story LIMIT 1'); return; } catch (Throwable $e) { /* installation ou mise à jour */ }
+    try { $pdo->query('SELECT s.quote, s.video, e.month_only FROM club_story s, club_events e LIMIT 1'); return; } catch (Throwable $e) { /* installation ou mise à jour */ }
     foreach ($tables as $sql) $pdo->exec($sql);
-    foreach (['quote' => 'TEXT NULL', 'video' => 'VARCHAR(80) NULL'] as $col => $type) {
-        try { $pdo->query("SELECT $col FROM club_story LIMIT 1"); } catch (Throwable $e) { $pdo->exec("ALTER TABLE club_story ADD COLUMN $col $type"); }
+    $add = ['club_story' => ['quote' => 'TEXT NULL', 'video' => 'VARCHAR(80) NULL'], 'club_events' => ['month_only' => 'INT NOT NULL DEFAULT 0']];
+    foreach ($add as $table => $cols) foreach ($cols as $col => $type) {
+        try { $pdo->query("SELECT $col FROM $table LIMIT 1"); } catch (Throwable $e) { $pdo->exec("ALTER TABLE $table ADD COLUMN $col $type"); }
     }
 }
 
@@ -262,7 +263,7 @@ function check_csrf() { admin_session(); if (!hash_equals($_SESSION['csrf'] ?? '
 function fr_date(string $d, bool $withYear = true): string {
     $mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
     $t = strtotime($d);
-    return (int)date('j', $t) . ($withYear ? ' ' : ' ') . $mois[(int)date('n', $t) - 1] . ($withYear ? ' ' . date('Y', $t) : '');
+    return (int)date('j', $t) . ' ' . $mois[(int)date('n', $t) - 1] . ($withYear ? ' ' . date('Y', $t) : '');
 }
 function fr_weekday(string $d): string { return ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'][(int)date('w', strtotime($d))]; }
 function fr_month_short(string $d): string { return ['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][(int)date('n', strtotime($d)) - 1]; }
@@ -306,6 +307,10 @@ function delete_photo(int $id) {
     q('DELETE FROM club_photos WHERE id = ?', [$id]);
     q('UPDATE club_events SET cover_photo_id = NULL WHERE cover_photo_id = ?', [$id]);
 }
+function event_date_label(array $e, bool $weekday = true): string {
+    if (!empty($e['month_only'])) return ucfirst(fr_month_year($e['event_date']));
+    return ($weekday ? ucfirst(fr_weekday($e['event_date'])) . ' ' : '') . fr_date($e['event_date']);
+}
 function fr_month_year(string $d): string { $m = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre']; $t = strtotime($d); return $m[(int)date('n', $t) - 1] . ' ' . date('Y', $t); }
 function photo_url(int $id, bool $full = false): string { return base_url('photo.php?id=' . $id . ($full ? '&t=full' : '')); }
 
@@ -342,5 +347,20 @@ function seed_story() {
         $vid = !empty($it['video']) && is_file($dir . '/' . $it['video']) ? save_video($dir . '/' . $it['video']) : null;
         q('INSERT INTO club_story (title, story_date, caption, quote, photo_id, video, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
           [$it['title'], $it['date'] ?: null, $it['text'], $it['quote'] ?? '', $pid, $vid, now()]);
+    }
+}
+
+/* Premiers événements passés, importés une seule fois à l'installation */
+function seed_events() {
+    if (setting('events_seeded')) return;
+    set_setting('events_seeded', '1');
+    $dir = DATA_DIR . '/seed-evenements';
+    if (!is_file($dir . '/seed.json')) return;
+    foreach (json_decode((string)file_get_contents($dir . '/seed.json'), true) ?: [] as $ev) {
+        if (q('SELECT id FROM club_events WHERE title = ? AND event_date = ?', [$ev['title'], $ev['date']])->fetch()) continue;
+        q('INSERT INTO club_events (title, event_date, event_time, place, description, month_only, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [$ev['title'], $ev['date'], $ev['time'] ?? '', $ev['place'] ?? '', $ev['text'], !empty($ev['month_only']) ? 1 : 0, now()]);
+        $eid = (int)db()->lastInsertId();
+        foreach ($ev['photos'] ?? [] as $f) if (is_file($dir . '/' . $f)) save_photo($dir . '/' . $f, $eid);
     }
 }

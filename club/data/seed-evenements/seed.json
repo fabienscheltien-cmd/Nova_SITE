@@ -1,0 +1,24 @@
+[
+ {
+  "title": "Soirée Noël & Poker des Immocuriens",
+  "date": "2025-12-01",
+  "month_only": true,
+  "time": "",
+  "place": "",
+  "text": "Pour Noël, l'association Les Immocuriens a réuni les acteurs de l'immobilier autour de ses tables de poker : une soirée conviviale et chaleureuse, au cœur de l'écosystème qui est le nôtre.\n\nMerci à notre table pour ce moment mémorable… et pour son fair-play face à nos bluffs approximatifs ! Merci à Cyril Dugue, président des Immocuriens, et à tout son Bureau.",
+  "photos": [
+   "poker.png"
+  ]
+ },
+ {
+  "title": "Dîner Club Réseau : Facility & Tapas",
+  "date": "2026-10-01",
+  "month_only": false,
+  "time": "19h30",
+  "place": "La Bodega Cambronne, 37 rue Cambronne, 75015 Paris",
+  "text": "Un Dîner Club Réseau coorganisé avec by Humens Groupe : des tapas, un verre et des gens sympas. On est venu pour le réseau… ou juste pour passer un bon moment.\n\n19h30, on se retrouve autour d'un verre. 20h30, tapas à partager. 22h00, on refait le monde (et le planning des salles de réunion).",
+  "photos": [
+   "bodega.jpg"
+  ]
+ }
+]

@@ -17,7 +17,7 @@ club_header($isPast ? 'passes' : 'venir');
   <header class="c-event-head">
     <a class="c-back" href="<?= h(base_url('club.php#' . ($isPast ? 'passes' : 'a-venir'))) ?>"><?= $isPast ? 'Événements passés' : 'À venir' ?></a>
     <h1><?= h($e['title']) ?></h1>
-    <p class="c-meta"><?= h(ucfirst(fr_weekday($e['event_date']))) ?> <?= h(fr_date($e['event_date'])) ?><?= (!$isPast && $e['event_time']) ? ' · ' . h($e['event_time']) : '' ?><?= $e['place'] ? ' · ' . h($e['place']) : '' ?></p>
+    <p class="c-meta"><?= h(event_date_label($e)) ?><?= (!$isPast && $e['event_time']) ? ' · ' . h($e['event_time']) : '' ?><?= $e['place'] ? ' · ' . h($e['place']) : '' ?></p>
   </header>
   <?php if (trim((string)$e['description']) !== ''): ?>
   <div class="c-event-body"><div class="c-desc">

@@ -104,6 +104,8 @@ $_SESSION['admin_until'] = time() + 8 * 3600;
 
 /* ---------------------------------------------------------------- 4. actions */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!$_POST && (int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 0)
+        flash_to('Envoi trop lourd pour l\'hébergement : réduisez la taille de la vidéo ou envoyez moins de photos à la fois.', $self . '?p=' . preg_replace('/[^a-z]/', '', (string)($_GET['p'] ?? 'demandes')), true);
     check_csrf();
     $a = (string)($_POST['action'] ?? '');
     $id = (int)($_POST['id'] ?? 0);
@@ -124,13 +126,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'forget':
             q('DELETE FROM club_sessions WHERE member_id = ?', [$id]); q('DELETE FROM club_tokens WHERE member_id = ?', [$id]);
             q('DELETE FROM club_members WHERE id = ?', [$id]);
-            flash_to('Adresse supprimée définitivement.', $self . '?p=' . ($_POST['back'] ?? 'invites'));
+            flash_to('Adresse supprimée définitivement.', $self . '?p=' . (($_POST['back'] ?? '') === 'demandes' ? 'demandes' : 'invites'));
         case 'event_save':
             $title = trim((string)($_POST['title'] ?? '')); $date = (string)($_POST['event_date'] ?? '');
             if ($title === '' || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) flash_to('Le titre et la date sont obligatoires.', $self . '?p=evenement' . ($id ? '&id=' . $id : ''), true);
-            $vals = [$title, $date, trim((string)($_POST['event_time'] ?? '')), trim((string)($_POST['place'] ?? '')), trim((string)($_POST['description'] ?? ''))];
-            if ($id) q('UPDATE club_events SET title = ?, event_date = ?, event_time = ?, place = ?, description = ? WHERE id = ?', array_merge($vals, [$id]));
-            else { q('INSERT INTO club_events (title, event_date, event_time, place, description, created_at) VALUES (?, ?, ?, ?, ?, ?)', array_merge($vals, [now()])); $id = (int)db()->lastInsertId(); }
+            $vals = [$title, $date, trim((string)($_POST['event_time'] ?? '')), trim((string)($_POST['place'] ?? '')), trim((string)($_POST['description'] ?? '')), empty($_POST['month_only']) ? 0 : 1];
+            if ($id) q('UPDATE club_events SET title = ?, event_date = ?, event_time = ?, place = ?, description = ?, month_only = ? WHERE id = ?', array_merge($vals, [$id]));
+            else { q('INSERT INTO club_events (title, event_date, event_time, place, description, month_only, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)', array_merge($vals, [now()])); $id = (int)db()->lastInsertId(); }
             $n = 0;
             if (!empty($_FILES['photos']['tmp_name']) && is_array($_FILES['photos']['tmp_name'])) {
                 foreach ($_FILES['photos']['tmp_name'] as $k => $tmp) if ($tmp && $_FILES['photos']['error'][$k] === UPLOAD_ERR_OK && save_photo($tmp, $id)) $n++;
@@ -190,6 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 /* ---------------------------------------------------------------- 5. pages */
 $p = (string)($_GET['p'] ?? 'demandes');
+seed_events(); seed_story();
 $pending = q("SELECT * FROM club_members WHERE status = 'pending' ORDER BY requested_at DESC")->fetchAll();
 function act(string $action, int $id, string $label, string $cls = '', string $confirm = '', string $extra = ''): string {
     return '<form method="post" style="display:inline">' . csrf_field() . '<input type="hidden" name="action" value="' . h($action) . '"><input type="hidden" name="id" value="' . $id . '">' . $extra
@@ -255,7 +258,7 @@ elseif ($p === 'evenements'):
   <?php if (!$events): ?><p class="a-help">Aucun événement. Créez le premier : il apparaîtra aussitôt dans le club.</p>
   <?php else: ?><div class="a-table-wrap"><table class="a-table"><thead><tr><th>Date</th><th>Titre</th><th>Photos</th><th></th></tr></thead><tbody>
     <?php foreach ($events as $e): ?><tr>
-      <td><?= h(fr_date($e['event_date'])) ?><br><span class="a-status <?= $e['event_date'] >= date('Y-m-d') ? 'wait' : 'off' ?>"><?= $e['event_date'] >= date('Y-m-d') ? 'À venir' : 'Passé' ?></span></td>
+      <td><?= h(event_date_label($e, false)) ?><br><span class="a-status <?= $e['event_date'] >= date('Y-m-d') ? 'wait' : 'off' ?>"><?= $e['event_date'] >= date('Y-m-d') ? 'À venir' : 'Passé' ?></span></td>
       <td><?= h($e['title']) ?></td><td><?= (int)$e['nb'] ?></td>
       <td><div class="a-row-actions"><a class="a-btn" href="?p=evenement&id=<?= (int)$e['id'] ?>">Modifier</a></div></td>
     </tr><?php endforeach; ?>
@@ -264,7 +267,7 @@ elseif ($p === 'evenements'):
 <?php /* ----- créer / modifier un événement */
 elseif ($p === 'evenement'):
   $e = !empty($_GET['id']) ? q('SELECT * FROM club_events WHERE id = ?', [(int)$_GET['id']])->fetch() : null;
-  $e = $e ?: ['id' => 0, 'title' => '', 'event_date' => '', 'event_time' => '', 'place' => '', 'description' => '', 'cover_photo_id' => null];
+  $e = $e ?: ['id' => 0, 'title' => '', 'event_date' => '', 'event_time' => '', 'place' => '', 'description' => '', 'cover_photo_id' => null, 'month_only' => 0];
   $photos = $e['id'] ? q('SELECT * FROM club_photos WHERE event_id = ? ORDER BY id ASC', [$e['id']])->fetchAll() : [];
   $cover = $e['cover_photo_id'] ?: ($photos[0]['id'] ?? null); ?>
   <p><a class="a-btn discret" href="?p=evenements">← Tous les événements</a></p><br>
@@ -276,6 +279,7 @@ elseif ($p === 'evenement'):
         <div><label for="d">Date</label><input id="d" type="date" name="event_date" value="<?= h($e['event_date']) ?>" required></div>
         <div><label for="t">Horaire (visible tant que l'événement est à venir)</label><input id="t" type="text" name="event_time" value="<?= h($e['event_time']) ?>" maxlength="60" placeholder="19h00 – 23h00"><p class="a-help">Affiché uniquement tant que l'événement est à venir.</p></div>
       </div>
+      <label style="text-transform:none;letter-spacing:0;font-family:inherit;color:var(--texte);margin-top:.6rem"><input type="checkbox" name="month_only" value="1"<?= !empty($e['month_only']) ? ' checked' : '' ?>> Jour exact inconnu : afficher seulement le mois et l'année</label>
       <label for="pl">Lieu</label><input id="pl" type="text" name="place" value="<?= h($e['place']) ?>" maxlength="200" placeholder="Salons privés, Paris 15e">
       <label for="desc">Texte</label><textarea id="desc" name="description" placeholder="Quelques lignes pour donner envie… Laissez une ligne vide pour commencer un nouveau paragraphe."><?= h($e['description']) ?></textarea>
       <p class="a-help">La mise en page est automatique. Une fois la date passée, l'événement rejoint de lui-même les « Événements passés ».</p>
@@ -347,7 +351,7 @@ elseif ($p === 'evenement'):
 elseif ($p === 'histoire'):
   seed_story();
   $edit = !empty($_GET['id']) ? q('SELECT * FROM club_story WHERE id = ?', [(int)$_GET['id']])->fetch() : null;
-  $items = q('SELECT * FROM club_story ORDER BY (story_date IS NULL) ASC, story_date ASC, id ASC')->fetchAll(); ?>
+  $items = q('SELECT * FROM club_story ORDER BY (story_date IS NULL) DESC, story_date DESC, id DESC')->fetchAll(); $total = count($items); ?>
   <section class="a-box"><h2>Texte d'ouverture</h2>
     <form method="post" class="a-form"><?= csrf_field() ?><input type="hidden" name="action" value="story_intro">
       <textarea name="intro" style="min-height:100px" aria-label="Texte d'ouverture"><?= h(story_intro()) ?></textarea>
@@ -356,7 +360,7 @@ elseif ($p === 'histoire'):
     </form>
   </section>
   <section class="a-box"><h2><?= $edit ? 'Modifier le chapitre' : 'Ajouter un chapitre' ?></h2>
-    <p class="a-help">Les chapitres sont numérotés automatiquement (Chapitre I, II, III…), du plus ancien au plus récent, d'après leur date.</p>
+    <p class="a-help">Les chapitres sont numérotés automatiquement d'après leur date (le plus ancien est le Chapitre I) et s'affichent du plus récent, en haut, au plus ancien, en bas.</p>
     <form method="post" enctype="multipart/form-data" class="a-form" data-shrink>
       <?= csrf_field() ?><input type="hidden" name="action" value="story_save"><input type="hidden" name="id" value="<?= (int)($edit['id'] ?? 0) ?>">
       <div class="a-grid2">
@@ -379,7 +383,7 @@ elseif ($p === 'histoire'):
   <?php else: ?><div class="a-table-wrap"><table class="a-table"><tbody>
     <?php foreach ($items as $n => $it): ?><tr>
       <td style="width:96px"><img src="<?= h(photo_url((int)$it['photo_id'])) ?>" alt="" style="width:80px;height:80px;object-fit:cover;border:1px solid var(--ligne)"></td>
-      <td><span class="a-status wait">Chapitre <?= roman($n + 1) ?><?= $it['video'] ? ' · vidéo' : '' ?></span><br><?= h($it['title']) ?><br><span class="a-help"><?= $it['story_date'] ? h(ucfirst(fr_month_year($it['story_date']))) : 'Sans date' ?></span></td>
+      <td><span class="a-status wait">Chapitre <?= roman($total - $n) ?><?= $it['video'] ? ' · vidéo' : '' ?></span><br><?= h($it['title']) ?><br><span class="a-help"><?= $it['story_date'] ? h(ucfirst(fr_month_year($it['story_date']))) : 'Sans date' ?></span></td>
       <td><div class="a-row-actions"><a class="a-btn" href="?p=histoire&id=<?= (int)$it['id'] ?>">Modifier</a><?= act('story_delete', (int)$it['id'], 'Retirer', 'danger', 'Retirer ce chapitre de « Notre histoire » ?') ?></div></td>
     </tr><?php endforeach; ?>
   </tbody></table></div><?php endif; ?></section>
